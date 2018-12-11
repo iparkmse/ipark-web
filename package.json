@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "3.6.2",
+    "@material-ui/icons": "3.0.1",
     "react": "16.6.3",
     "react-dom": "16.6.3",
     "react-scripts": "2.1.1"
@@ -28,7 +30,6 @@
   "devDependencies": {
     "@storybook/addon-knobs": "4.0.12",
     "@storybook/react": "4.0.12",
-    "eslint": "5.10.0",
     "storybook-addon-jsx": "6.0.0"
   }
 }

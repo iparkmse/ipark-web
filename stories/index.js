@@ -3,6 +3,9 @@ import { storiesOf } from '@storybook/react'
 import { Button } from '@storybook/react/demo'
 import { text, color, object, boolean, number } from '@storybook/addon-knobs'
 
+import StarIcon from '@material-ui/icons/Stars'
+import BackupIcon from '@material-ui/icons/Backup'
+
 let buttonStyle = {
   backgroundColor: 'green',
   color: 'red',
@@ -30,3 +33,7 @@ storiesOf('Button', module)
 
 storiesOf('Span', module)
   .addWithJSX('span with number', () => <span>{number('Age', 78)}</span>)
+
+storiesOf('Material-UI icon', module)
+  .addWithJSX('star icon', () => <StarIcon>Outlined</StarIcon>)
+  .addWithJSX('backup icon', () => <BackupIcon>Filled</BackupIcon>)
