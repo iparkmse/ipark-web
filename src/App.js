@@ -11,7 +11,15 @@ class App extends Component {
     firebaseBD.collection('todolist').onSnapshot(snapshot => {
       let changes = snapshot.docChanges()
       changes.map(change => {
-        if (change.type === 'added') return this.setState({todos: [...this.state.todos, {id: change.doc.id, item: change.doc.data().item}]})
+        if (change.type === 'removed') return this.setState({todos: this.state.todos.filter(todo => todo.id !== change.doc.id)})
+        else if (change.type === 'modified') {
+          const updatedTodos = this.state.todos.map(todo => {
+            if (todo.id !== change.doc.id) return todo
+            else return {id: change.doc.id, item: change.doc.data().item}
+          })
+          return this.setState({ todos: updatedTodos })
+        }
+        return this.setState({ todos: [...this.state.todos, {id: change.doc.id, item: change.doc.data().item }]})
       })
     })
   }
