@@ -2,7 +2,7 @@
 name: Bug tempalte
 about: Create a bug ticket to help us improve
 title: ''
-labels: 'bug'
+labels: bug
 assignees: ''
 
 ---
