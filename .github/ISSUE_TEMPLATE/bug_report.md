@@ -1,5 +1,5 @@
 ---
-name: Bug tempalte
+name: Bug report
 about: Create a bug ticket to help us improve
 title: ''
 labels: bug
