@@ -1,8 +1,8 @@
 ---
-name: Bug report
+name: Bug tempalte
 about: Create a bug ticket to help us improve
 title: ''
-labels: ''
+labels: 'bug'
 assignees: ''
 
 ---
