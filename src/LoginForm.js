@@ -58,7 +58,7 @@ const Input = styled.input`
 `
 
 const LabelSmall = styled.label`
-  color: #FFFFFF; // White
+  color: #FFFFFF; /* White */
   font-size: 15px;
   margin: 0 0 10px 0;
 `
@@ -75,18 +75,16 @@ class LoginForm extends Component {
       const email = this.state.email
       const password = this.state.password
       auth.signInWithEmailAndPassword(email, password)
-        .then(cred => {
-          console.log(cred.user)
+        .then(UserCredential => {
+          console.log('cred valid! Login as', UserCredential.user.email)
         })
         .catch(err => {
-          console.log(err)
+          console.log(err.message)
         })
       console.log('Form Submitted \nEmail Adress:', this.state.email, '\nPassword:', this.state.password)
     }
     handleChange = (e) => {
-      this.setState({
-        [e.target.name]: e.target.value
-      }, () => console.log(this.state.email))
+      this.setState({ [e.target.name]: e.target.value })
     }
     handleCheckbox = () => {
       console.log('Remember User', this.state.email)
