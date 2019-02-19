@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
+import firebaseApp from './firebase'
 
 const Form = styled.form`
   background-color: rgba(0, 0, 0, 0.6);  // Black with Transparency of 40%
@@ -62,6 +63,8 @@ const LabelSmall = styled.label`
   margin: 0 0 10px 0;
 `
 
+const auth = firebaseApp.auth()
+
 class LoginForm extends Component {
     state = {
       email: null,
@@ -69,6 +72,15 @@ class LoginForm extends Component {
     }
     handleSubmit = (e) => {
       e.preventDefault()
+      const email = this.state.email
+      const password = this.state.password
+      auth.signInWithEmailAndPassword(email, password)
+        .then(cred => {
+          console.log(cred.user)
+        })
+        .catch(err => {
+          console.log(err)
+        })
       console.log('Form Submitted \nEmail Adress:', this.state.email, '\nPassword:', this.state.password)
     }
     handleChange = (e) => {
