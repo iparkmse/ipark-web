@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import LoginForm from './LoginForm'
 import firebaseApp from './firebase'
 
-const db = firebaseApp.firestore()
+const db = firebaseApp.database()
 
 class App extends Component {
   state = {
@@ -10,27 +10,23 @@ class App extends Component {
   }
 
   componentDidMount() {
-    let tmpArr = []
-    db.collection('stalls').orderBy('index').get()
+    db.ref('stalls').once('value')
       .then(snapshot => {
-        snapshot.docs.map(doc => tmpArr.push(doc.data()))
+        let stallsData = snapshot.val()
+        let tmpArr = []
+        for (let stall in stallsData) {
+          tmpArr.push(stallsData[stall])
+        }
         this.setState({ stalls: tmpArr })
-      })
-      .catch(err => console.log(err))
+      }, err => console.log(err))
   }
 
   componentDidUpdate() {
     let copyStalls = this.state.stalls
-    db.collection('stalls').onSnapshot(snapshot => {
-      const changes = snapshot.docChanges()
-      changes.map(change => {
-        if (change.type === 'modified') {
-          copyStalls[change.doc.data().index] = change.doc.data()
-          this.setState({ stalls: copyStalls }, () => console.log('updated!:', change.doc.data(), this.state.stalls))
-        }
-      })
+    db.ref('stalls').on('child_changed', childSnapshot => {
+      copyStalls[childSnapshot.val().index] = childSnapshot.val()
+      this.setState({ stalls: copyStalls })
     }, err => console.log(err))
-
   }
 
   render() {
