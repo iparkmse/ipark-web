@@ -5,7 +5,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import firebaseApp from './firebase'
 
 const Form = styled.form`
-  background-color: rgba(0, 0, 0, 0.6);  // Black with Transparency of 40%
+  background-color: rgba(0, 0, 0, 0.6);  /* Black with Transparency of 40% */
   width: 600px;
   /*height: 500px;*/
   padding: 60px 10px;
@@ -17,7 +17,7 @@ const Form = styled.form`
 const Title = styled.label`
   display: inline-block; 
   margin: 10px 20px 40px 20px;
-  color: #D8E2F3;  // Baby Blue
+  color: #D8E2F3;  /* Baby Blue */
   font-size: 45px;
   font-weight: bold;
 `
@@ -25,7 +25,7 @@ const Title = styled.label`
 const Label = styled.label`
   display: inline-block; 
   margin: 10px 10px 10px 10px;
-  color: #FFFFFF; // White
+  color: #FFFFFF; /* White */
   font-size: 22px;
   letter-spacing: 1px;
 `
