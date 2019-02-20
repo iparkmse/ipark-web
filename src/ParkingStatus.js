@@ -1,82 +1,24 @@
 import React, { Component } from 'react'
+import StatusTable from './StatusTable'
 
 class ParkingStatus extends Component {
-  // state = {
-  //    stall = {
-  //        { stall_id}
-  //    }
-  // }
+  state = {
+    stall: [
+      {ID: 'A1', status: 'Vacant', id: 1},
+      {ID: 'A2', status: 'Ocupied', id: 2},
+      {ID: 'A3', status: 'Vacant', id: 3},
+      {ID: 'A4', status: 'Ocupied', id: 4},
+      {ID: 'A5', status: 'Vacant', id: 5},
+      {ID: 'B1', status: 'Vacant', id: 6},
+      {ID: 'B2', status: 'Vacant', id: 7},
+      {ID: 'B3', status: 'Vacant', id: 8},
+      {ID: 'B4', status: 'Ocupied', id: 9},
+      {ID: 'B5', status: 'Ocupied', id: 10},
+    ]
+  }
   render(){
     return(
-      <table>
-        <thead>
-          <tr>
-            <th>PARKING STATUS</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <label>A1</label>
-              <br/>
-              <label>Status: </label>
-            </td>
-            <td>
-              <label>B1</label>
-              <br/>
-              <label>Status: </label>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label>A2</label>
-              <br/>
-              <label>Status: </label>
-            </td>
-            <td>
-              <label>B2</label>
-              <br/>
-              <label>Status: </label>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label>A3</label>
-              <br/>
-              <label>Status: </label>
-            </td>
-            <td>
-              <label>B3</label>
-              <br/>
-              <label>Status: </label>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label>A4</label>
-              <br/>
-              <label>Status: </label>
-            </td>
-            <td>
-              <label>B4</label>
-              <br/>
-              <label>Status: </label>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label>A5</label>
-              <br/>
-              <label>Status: </label>
-            </td>
-            <td>
-              <label>B5</label>
-              <br/>
-              <label>Status: </label>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <StatusTable data={this.state.stall}/>
     )
   }
 }

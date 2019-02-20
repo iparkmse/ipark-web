@@ -6,7 +6,7 @@ import LoginForm from '../src/LoginForm'
 
 import StarIcon from '@material-ui/icons/Stars'
 import BackupIcon from '@material-ui/icons/Backup'
-import ParkingStatus from '../src/ParkingStatus';
+import ParkingStatus from '../src/ParkingStatus'
 
 let buttonStyle = {
   backgroundColor: 'green',
