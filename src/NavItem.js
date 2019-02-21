@@ -9,10 +9,10 @@ const Title = styled.span`
   color: #1F3864;  /* dark blue */
   font-weight: bold;
   margin: 10px;
-  text-shadow: ${({isOpen}) => isOpen && '0px 0px 15px Peru'};
+  text-shadow: ${({isOpen}) => isOpen && '0px 0px 15px Peru, 0px 0px 15px peru'};
 
   &:hover {
-    text-shadow: 0px 0px 15px Peru;
+    text-shadow: 0px 0px 15px Peru, 0px 0px 15px peru;
   }
 `
 // override backdrop style
