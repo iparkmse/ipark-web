@@ -2,8 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
-import NavItem from './NavItem'
-import LoginForm from './LoginForm'
+import NavLogin from './NavLogin'
 
 const ImgWrapper = styled.span`
   padding: 5px 5px 2px 5px;
@@ -18,10 +17,7 @@ const Navbar = () => {
           <ImgWrapper>
             <img src={require('./img/ipark_logo.png')} alt='missing image' />
           </ImgWrapper>
-          <NavItem
-            itemTitle='login'
-            itemContent={<LoginForm />}
-          />
+          <NavLogin />
         </Toolbar>
       </AppBar>
     </div>

@@ -77,6 +77,7 @@ class LoginForm extends Component {
       auth.signInWithEmailAndPassword(email, password)
         .then(UserCredential => {
           console.log('cred valid! Login as', UserCredential.user.email)
+          this.props.handleClose()
         })
         .catch(err => {
           console.log(err.message)
