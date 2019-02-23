@@ -37,6 +37,7 @@ class NavItem extends Component {
 
   render() {
     const { itemTitle, itemContent, classes } = this.props
+
     return (
       <div>
         <Title
@@ -51,7 +52,7 @@ class NavItem extends Component {
           maxWidth='lg'
           BackdropProps={{ className: classes.backdrop }}
         >
-          {itemContent}
+          {React.cloneElement(itemContent, {handleClose: this.handleClose})}
         </Dialog>
       </div>
     )
