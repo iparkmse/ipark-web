@@ -33,14 +33,14 @@ const CellRed = styled(CellGreen)`
 
 const StatusSummary = ({data}) => {
   let vacant = 0
-  let ocupied = 0
+  let occupied = 0
   let reserved = 0
   data.map(d => {
     if (d.status == 'vacant') {
       vacant++
     }
-    else if (d.status == 'ocupied') {
-      ocupied++
+    else if (d.status == 'occupied') {
+      occupied++
     }
     else if (d.status == 'reserved') {
       reserved++
@@ -62,7 +62,7 @@ const StatusSummary = ({data}) => {
             <CellYellow>reserved</CellYellow><CellYellow>{reserved}</CellYellow>
           </tr>
           <tr>
-            <CellRed>ocupied</CellRed><CellRed>{ocupied}</CellRed>
+            <CellRed>occupied</CellRed><CellRed>{occupied}</CellRed>
           </tr>
         </tbody>
       </Table>
@@ -71,7 +71,7 @@ const StatusSummary = ({data}) => {
 }
 
 StatusSummary.propTypes = {
-  data: PropTypes.array
+  data: PropTypes.array.isRequired
 }
 
 export default StatusSummary

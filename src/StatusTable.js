@@ -73,7 +73,7 @@ const StatusTable = ({data}) => {
 }
 
 StatusTable.propTypes = {
-  data: PropTypes.array
+  data: PropTypes.array.isRequired
 }
 
 export default StatusTable

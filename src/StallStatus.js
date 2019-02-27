@@ -24,7 +24,7 @@ const StallStatus = ({status}) => {
       <DotGreen></DotGreen>
     )
   }
-  else if (status == 'ocupied') {
+  else if (status == 'occupied') {
     return (
       <DotRed></DotRed>
     )

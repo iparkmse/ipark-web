@@ -40,7 +40,7 @@ const StatusLegend = () => {
             <Cell><DotYellow/></Cell><Cell>Reserved</Cell>
           </tr>
           <tr>
-            <Cell><DotRed/></Cell><Cell>Ocupied</Cell>
+            <Cell><DotRed/></Cell><Cell>Occupied</Cell>
           </tr>
         </tbody>
       </Table>

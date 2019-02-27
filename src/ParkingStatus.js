@@ -23,7 +23,7 @@ const SummaryCell = styled.td`
 `
 
 const StatusCell = styled.td`
-  padding: 1px 50px 1px 50px;
+  padding: 1px 30px 1px 30px;
 `
 
 const LegendCell = styled.td`
@@ -34,14 +34,14 @@ class ParkingStatus extends Component {
   state = {
     stall: [
       {ID: 'A1', status: 'vacant', index: 0},
-      {ID: 'A2', status: 'ocupied', index: 1},
+      {ID: 'A2', status: 'occupied', index: 1},
       {ID: 'A3', status: 'vacant', index: 2},
-      {ID: 'A4', status: 'ocupied', index: 3},
+      {ID: 'A4', status: 'occupied', index: 3},
       {ID: 'A5', status: 'vacant', index: 4},
       {ID: 'B1', status: 'vacant', index: 5},
       {ID: 'B2', status: 'vacant', index: 6},
       {ID: 'B3', status: 'vacant', index: 7},
-      {ID: 'B4', status: 'ocupied', index: 8},
+      {ID: 'B4', status: 'occupied', index: 8},
       {ID: 'B5', status: 'reserved', index: 9},
     ],
   }
