@@ -46,7 +46,7 @@ const StatusSummary = ({data}) => {
       reserved++
     }
   })
-  
+
   return(
     <div>
       <Table>
