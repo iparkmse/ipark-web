@@ -35,7 +35,8 @@ const db = firebaseApp.database()
 
 class ParkingStatus extends Component {
   state = {
-    stalls: []
+    stalls: [],
+    number: null, // the number of stalls
   }
 
   componentDidMount() {
@@ -46,7 +47,10 @@ class ParkingStatus extends Component {
         for (let stall in stallsData) {
           tmpArr.push(stallsData[stall])
         }
-        this.setState({ stalls: tmpArr })
+        this.setState({ 
+          stalls: tmpArr,
+          number: tmpArr.length
+        })
       }, err => console.log(err))
   }
 
@@ -59,7 +63,10 @@ class ParkingStatus extends Component {
   }
 
   render(){
-    if (this.state.stalls.length) {
+    if (
+      this.state.stalls.length === this.state.number
+      && !this.state.stalls.includes(undefined) // prevent StatusTable to crash when updating stalls
+    ) {
       return (
         <Wrapper>
           <Table>
