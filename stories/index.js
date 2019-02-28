@@ -2,6 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { Button } from '@storybook/react/demo'
 import { text, color, object, boolean, number } from '@storybook/addon-knobs'
+import LoginForm from '../src/LoginForm'
 
 import StarIcon from '@material-ui/icons/Stars'
 import BackupIcon from '@material-ui/icons/Backup'
@@ -37,3 +38,8 @@ storiesOf('Span', module)
 storiesOf('Material-UI icon', module)
   .addWithJSX('star icon', () => <StarIcon>Outlined</StarIcon>)
   .addWithJSX('backup icon', () => <BackupIcon>Filled</BackupIcon>)
+
+storiesOf('React Component', module)
+  .add('Login form V1', () => (
+    <LoginForm />
+  ))
