@@ -51,7 +51,7 @@ const StatusSummary = ({data}) => {
       <Table>
         <thead>
           <tr>
-            <CellHeader colSpan='2'>SUMMMARY</CellHeader>
+            <CellHeader colSpan='2'>SUMMARY</CellHeader>
           </tr>
         </thead>
         <tbody>
