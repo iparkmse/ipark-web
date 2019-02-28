@@ -47,7 +47,7 @@ class ParkingStatus extends Component {
         for (let stall in stallsData) {
           tmpArr.push(stallsData[stall])
         }
-        this.setState({ 
+        this.setState({
           stalls: tmpArr,
           number: tmpArr.length
         })
