@@ -1,15 +1,15 @@
 import firebase from 'firebase'
 
 var config = {
-  apiKey: 'AIzaSyDl-AYd0vY00wQcbVuWzzswzEvII41rhqE',
-  authDomain: 'todo-9c204.firebaseapp.com',
-  databaseURL: 'https://todo-9c204.firebaseio.com',
-  projectId: 'todo-9c204',
-  storageBucket: '',
-  messagingSenderId: '643699755820'
+  apiKey: 'AIzaSyCsfPTKJ16yYxKNo7X79ouxIn7YQe2H-bY',
+  authDomain: 'ipark-2997b.firebaseapp.com',
+  databaseURL: 'https://ipark-2997b.firebaseio.com',
+  projectId: 'ipark-2997b',
+  storageBucket: 'ipark-2997b.appspot.com',
+  messagingSenderId: '670632380239'
 }
 
 const firebaseApp = firebase.initializeApp(config)
 firebaseApp.firestore().settings({ timestampsInSnapshots: true })
 
-export default firebaseApp.firestore()
+export default firebaseApp
