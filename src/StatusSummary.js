@@ -36,16 +36,17 @@ const StatusSummary = ({data}) => {
   let occupied = 0
   let reserved = 0
   data.map(d => {
-    if (d.status == 'vacant') {
+    if (d.status === 'vacant') {
       vacant++
     }
-    else if (d.status == 'occupied') {
+    else if (d.status === 'occupied') {
       occupied++
     }
-    else if (d.status == 'reserved') {
+    else if (d.status === 'reserved') {
       reserved++
     }
   })
+
   return(
     <div>
       <Table>

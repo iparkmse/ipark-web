@@ -45,5 +45,5 @@ storiesOf('React Component', module)
     <LoginForm />
   ))
   .add('Parking Status Table', () => (
-    <ParkingStatus/>
+    <ParkingStatus />
   ))
