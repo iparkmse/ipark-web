@@ -8,6 +8,7 @@ import NavItem from '../src/NavItem'
 
 import StarIcon from '@material-ui/icons/Stars'
 import BackupIcon from '@material-ui/icons/Backup'
+import ParkingStatus from '../src/ParkingStatus'
 
 let buttonStyle = {
   backgroundColor: 'green',
@@ -44,6 +45,9 @@ storiesOf('Material-UI icon', module)
 storiesOf('React Component', module)
   .add('Login form V1', () => (
     <LoginForm />
+  ))
+  .add('Parking Status Table', () => (
+    <ParkingStatus />
   ))
   .add('Navigation bar', () => (
     <Navbar />

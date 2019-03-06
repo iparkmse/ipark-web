@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Dialog from '@material-ui/core/Dialog'
 import { withStyles } from '@material-ui/core/styles'
@@ -57,6 +58,12 @@ class NavItem extends Component {
       </div>
     )
   }
+}
+
+NavItem.propTypes = {
+  itemTitle: PropTypes.string.isRequired,
+  itemContent: PropTypes.element.isRequired,
+  classes: PropTypes.object
 }
 
 export default withStyles(styles)(NavItem)
