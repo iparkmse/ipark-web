@@ -3,6 +3,8 @@ import { storiesOf } from '@storybook/react'
 import { Button } from '@storybook/react/demo'
 import { text, color, object, boolean, number } from '@storybook/addon-knobs'
 import LoginForm from '../src/LoginForm'
+import Navbar from '../src/Navbar'
+import NavItem from '../src/NavItem'
 
 import StarIcon from '@material-ui/icons/Stars'
 import BackupIcon from '@material-ui/icons/Backup'
@@ -46,4 +48,10 @@ storiesOf('React Component', module)
   ))
   .add('Parking Status Table', () => (
     <ParkingStatus />
+  ))
+  .add('Navigation bar', () => (
+    <Navbar />
+  ))
+  .add('Navigation item', () => (
+    <NavItem itemTitle='login' itemContent={<LoginForm />} />
   ))

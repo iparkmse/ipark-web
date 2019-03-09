@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
@@ -77,6 +78,7 @@ class LoginForm extends Component {
       auth.signInWithEmailAndPassword(email, password)
         .then(UserCredential => {
           console.log('cred valid! Login as', UserCredential.user.email)
+          this.props.handleClose()
         })
         .catch(err => {
           console.log(err.message)
@@ -121,6 +123,10 @@ class LoginForm extends Component {
         </div>
       )
     }
+}
+
+LoginForm.propTypes = {
+  handleClose: PropTypes.func
 }
 
 export default LoginForm
