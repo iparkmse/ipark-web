@@ -18,6 +18,10 @@ const DotYellow = styled(DotGreen)`
   background-color: gold;
 `
 
+const DotBlack = styled(DotGreen)`
+  background-color: grey;
+`
+
 const StallStatus = ({status}) => {
   if (status == 'vacant') {
     return (
@@ -32,6 +36,11 @@ const StallStatus = ({status}) => {
   else if (status == 'reserved') {
     return (
       <DotYellow></DotYellow>
+    )
+  }
+  else if (status == '') {
+    return(
+      <DotBlack></DotBlack>
     )
   }
 }
