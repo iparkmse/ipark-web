@@ -23,24 +23,29 @@ const DotBlack = styled(DotGreen)`
 `
 
 const StallStatus = ({status}) => {
-  if (status == 'vacant') {
+  if (status === 'vacant') {
     return (
       <DotGreen></DotGreen>
     )
   }
-  else if (status == 'occupied') {
+  else if (status === 'occupied') {
     return (
       <DotRed></DotRed>
     )
   }
-  else if (status == 'reserved') {
+  else if (status === 'reserved') {
     return (
       <DotYellow></DotYellow>
     )
   }
-  else if (status == '') {
+  else if (status === '') {
     return(
       <DotBlack></DotBlack>
+    )
+  }
+  else {
+    return (
+      <div>invalid status: {status}</div>
     )
   }
 }

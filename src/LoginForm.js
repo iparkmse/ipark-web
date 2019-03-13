@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
+import firebaseApp from './firebase'
 
 const Form = styled.form`
-  background-color: rgba(0, 0, 0, 0.6);  // Black with Transparency of 40%
+  background-color: rgba(0, 0, 0, 0.6);  /* Black with Transparency of 40% */
   width: 600px;
   /*height: 500px;*/
   padding: 60px 10px;
@@ -16,7 +18,7 @@ const Form = styled.form`
 const Title = styled.label`
   display: inline-block; 
   margin: 10px 20px 40px 20px;
-  color: #D8E2F3;  // Baby Blue
+  color: #D8E2F3;  /* Baby Blue */
   font-size: 45px;
   font-weight: bold;
 `
@@ -24,7 +26,7 @@ const Title = styled.label`
 const Label = styled.label`
   display: inline-block; 
   margin: 10px 10px 10px 10px;
-  color: #FFFFFF; // White
+  color: #FFFFFF; /* White */
   font-size: 22px;
   letter-spacing: 1px;
 `
@@ -57,10 +59,12 @@ const Input = styled.input`
 `
 
 const LabelSmall = styled.label`
-  color: #FFFFFF; // White
+  color: #FFFFFF; /* White */
   font-size: 15px;
   margin: 0 0 10px 0;
 `
+
+const auth = firebaseApp.auth()
 
 class LoginForm extends Component {
     state = {
@@ -69,12 +73,20 @@ class LoginForm extends Component {
     }
     handleSubmit = (e) => {
       e.preventDefault()
+      const email = this.state.email
+      const password = this.state.password
+      auth.signInWithEmailAndPassword(email, password)
+        .then(UserCredential => {
+          console.log('cred valid! Login as', UserCredential.user.email)
+          this.props.handleClose()
+        })
+        .catch(err => {
+          console.log(err.message)
+        })
       console.log('Form Submitted \nEmail Adress:', this.state.email, '\nPassword:', this.state.password)
     }
     handleChange = (e) => {
-      this.setState({
-        [e.target.name]: e.target.value
-      }, () => console.log(this.state.email))
+      this.setState({ [e.target.name]: e.target.value })
     }
     handleCheckbox = () => {
       console.log('Remember User', this.state.email)
@@ -111,6 +123,10 @@ class LoginForm extends Component {
         </div>
       )
     }
+}
+
+LoginForm.propTypes = {
+  handleClose: PropTypes.func
 }
 
 export default LoginForm

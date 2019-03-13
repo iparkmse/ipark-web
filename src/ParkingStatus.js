@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import StatusTable from './StatusTable'
 import StatusSummary from './StatusSummary'
 import StatusLegend from './StatusLegend'
+import firebaseApp from './firebase'
 
 const Wrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.6);  // Black with Transparency of 40%
@@ -30,31 +31,54 @@ const LegendCell = styled.div`
   padding: 1px 50px 1px 20px;
 `
 
+const db = firebaseApp.database()
+
 class ParkingStatus extends Component {
   state = {
-    stall: [
-      {ID: 'A1', status: 'vacant', index: 0},
-      {ID: 'A2', status: 'occupied', index: 1},
-      {ID: 'A3', status: '', index: 2},
-      {ID: 'A4', status: '', index: 3},
-      {ID: 'A5', status: '', index: 4},
-      {ID: 'B1', status: 'vacant', index: 5},
-      {ID: 'B2', status: 'occupied', index: 6},
-      {ID: 'B3', status: '', index: 7},
-      {ID: 'B4', status: '', index: 8},
-      {ID: 'B5', status: '', index: 9},
-    ],
+    stalls: [],
+    number: null, // the number of stalls
   }
+
+  componentDidMount() {
+    db.ref('stalls').once('value')
+      .then(snapshot => {
+        let stallsData = snapshot.val()
+        let tmpArr = []
+        for (let stall in stallsData) {
+          tmpArr.push(stallsData[stall])
+        }
+        this.setState({
+          stalls: tmpArr,
+          number: tmpArr.length
+        })
+      }, err => console.log(err))
+  }
+
+  componentDidUpdate() {
+    let copyStalls = this.state.stalls
+    db.ref('stalls').on('child_changed', childSnapshot => {
+      copyStalls[childSnapshot.val().index] = childSnapshot.val()
+      this.setState({ stalls: copyStalls })
+    }, err => console.log(err))
+  }
+
   render(){
-    return(
-      <Wrapper>
-        <GridWrapper>
-          <SummaryCell><StatusSummary data={this.state.stall}/></SummaryCell>
-          <StatusCell><StatusTable data={this.state.stall}/></StatusCell>
-          <LegendCell><StatusLegend/></LegendCell>
-        </GridWrapper>
-      </Wrapper>
-    )
+    if (
+      this.state.stalls.length === this.state.number
+      && !this.state.stalls.includes(undefined) // prevent StatusTable to crash when updating stalls
+    ) {
+      return (
+        <Wrapper>
+          <GridWrapper>
+            <SummaryCell><StatusSummary data={this.state.stalls}/></SummaryCell>
+            <StatusCell><StatusTable data={this.state.stalls}/></StatusCell>
+            <LegendCell><StatusLegend/></LegendCell>
+          </GridWrapper>
+        </Wrapper>
+      )
+    }
+
+    return <div>Loading...</div>
   }
 }
 
