@@ -18,7 +18,7 @@ const DotYellow = styled(DotGreen)`
   background-color: gold;
 `
 
-const DotBlack = styled(DotGreen)`
+const DotGrey = styled(DotGreen)`
   background-color: grey;
 `
 
@@ -40,7 +40,7 @@ const StallStatus = ({status}) => {
   }
   else if (status === '') {
     return(
-      <DotBlack></DotBlack>
+      <DotGrey></DotGrey>
     )
   }
   else {
