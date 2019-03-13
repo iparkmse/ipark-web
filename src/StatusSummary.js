@@ -48,26 +48,24 @@ const StatusSummary = ({data}) => {
   })
 
   return(
-    <div>
-      <Table>
-        <thead>
-          <tr>
-            <CellHeader colSpan='2'>SUMMARY</CellHeader>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <CellGreen>vacant</CellGreen><CellGreen>{vacant}</CellGreen>
-          </tr>
-          <tr>
-            <CellYellow>reserved</CellYellow><CellYellow>{reserved}</CellYellow>
-          </tr>
-          <tr>
-            <CellRed>occupied</CellRed><CellRed>{occupied}</CellRed>
-          </tr>
-        </tbody>
-      </Table>
-    </div>
+    <Table>
+      <thead>
+        <tr>
+          <CellHeader colSpan='2'>SUMMARY</CellHeader>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <CellGreen>vacant</CellGreen><CellGreen>{vacant}</CellGreen>
+        </tr>
+        <tr>
+          <CellYellow>reserved</CellYellow><CellYellow>{reserved}</CellYellow>
+        </tr>
+        <tr>
+          <CellRed>occupied</CellRed><CellRed>{occupied}</CellRed>
+        </tr>
+      </tbody>
+    </Table>
   )
 }
 

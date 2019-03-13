@@ -26,6 +26,7 @@ const Table = styled.table`
 
 const Cell = styled.td`
   padding: 5px 5px 5px 5px;
+  color: navajowhite;
 `
 
 const StatusLegend = () => {
