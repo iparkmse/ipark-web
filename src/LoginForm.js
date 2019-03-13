@@ -115,7 +115,6 @@ class LoginForm extends Component {
             />
             <br/>
             <Button type='submit'>LOGIN</Button>
-            {/* <Button type='submit'><ALink href='https://github.com/iparkmse' target='_blank'>LOGIN</ALink></Button> */}
             <br/>
             <LabelSmall><ALink href='https://github.com/iparkmse'>Forget Password</ALink></LabelSmall>
             <br/>
