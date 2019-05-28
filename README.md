@@ -23,7 +23,7 @@
 <ul>
   <li><b>Realtime parking status:</b> users can check the realtime parking lot and stalls status.</li>
   <li><b>User-friendly UI:</b> parking status data is visualized and presented in a user-friendly way.</li>
-  <li><b>Reservation:</b> future usage of parking spots can be reservaed and worry-free.</li>
+  <li><b>Reservation:</b> future usage of parking spots can be reserved and worry-free.</li>
 </ul>
 
 <h2>Built with</h2>
