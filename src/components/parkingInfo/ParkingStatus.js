@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import StatusTable from './StatusTable'
 import StatusSummary from './StatusSummary'
 import StatusLegend from './StatusLegend'
-import firebaseApp from './firebase'
+import firebaseApp from '../../firebase'
 
 const Wrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.6);  // Black with Transparency of 40%

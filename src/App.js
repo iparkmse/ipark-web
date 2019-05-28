@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ParkingStatus from './ParkingStatus'
+import ParkingStatus from './components/parkingInfo/ParkingStatus'
 
 class App extends Component {
   render() {

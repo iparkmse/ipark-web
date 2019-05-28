@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
-import firebaseApp from './firebase'
+import firebaseApp from '../../firebase'
 
 const Form = styled.form`
   background-color: rgba(0, 0, 0, 0.6);  /* Black with Transparency of 40% */

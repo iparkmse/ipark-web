@@ -35,7 +35,7 @@ const StatusSummary = ({data}) => {
   let vacant = 0
   let occupied = 0
   let reserved = 0
-  data.map(d => {
+  data.forEach(d => {
     if (d.status === 'vacant') {
       vacant++
     }
