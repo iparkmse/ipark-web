@@ -5,7 +5,7 @@ import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import firebaseApp from '../../firebase'
 
-const Form = styled.form`
+export const Form = styled.form`
   background-color: rgba(0, 0, 0, 0.6);  /* Black with Transparency of 40% */
   width: 600px;
   /*height: 500px;*/
@@ -15,7 +15,7 @@ const Form = styled.form`
   font-family: 'Gill Sans', sans-serif;
 `
 
-const Title = styled.label`
+export const Title = styled.label`
   display: inline-block; 
   margin: 10px 20px 40px 20px;
   color: #D8E2F3;  /* Baby Blue */
@@ -31,7 +31,7 @@ const Label = styled.label`
   letter-spacing: 1px;
 `
 
-const Button = styled.button`
+export const Button = styled.button`
   background: #AEABAB;
   color: #FFFFFF;
   border: 2px solid #AEABAB;
@@ -48,7 +48,7 @@ const ALink = styled.a`
   text-decoration: none;
 `
 
-const Input = styled.input`
+export const Input = styled.input`
   font-size: 15px;
   color: #FFFF;
   padding: 5px 15px;
