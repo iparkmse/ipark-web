@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import StatusTable from './StatusTable'
 import StatusSummary from './StatusSummary'
 import StatusLegend from './StatusLegend'
+import Spinner from '../util/Spinner'
 import firebaseApp from '../../firebase'
 
 const Wrapper = styled.div`
@@ -78,7 +79,7 @@ class ParkingStatus extends Component {
       )
     }
 
-    return <div>Loading...</div>
+    return <Spinner />
   }
 }
 
