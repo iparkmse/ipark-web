@@ -57,6 +57,11 @@ export const Input = styled.input`
   border-radius: 3px;
 
   border: ${props => props.error ? '3px solid red' : '3px solid #FFFF'};
+
+  ::placeholder {
+    color: #D8E2F3;
+    opacity: 0.6;
+  }
 `
 
 const LabelSmall = styled.label`
