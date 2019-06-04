@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes } from 'styled-components'
 
 const rotate = keyframes`
   from {
@@ -8,7 +8,7 @@ const rotate = keyframes`
   to {
     transform: rotate(360deg);
   }
-`;
+`
 
 // Here we create a component that will rotate everything we pass in over one second
 const Spinner = styled.div`
@@ -21,6 +21,6 @@ const Spinner = styled.div`
   width: 50px;
   height: 50px;
   margin: 100px auto;
-`;
+`
 
-export default Spinner;
+export default Spinner

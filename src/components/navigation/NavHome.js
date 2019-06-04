@@ -10,7 +10,7 @@ export default class NavHome extends Component {
   state = {
     login: null
   }
-  
+
   componentDidMount() {
     auth.onAuthStateChanged(user => {
       const isLogin = user ? true : false
