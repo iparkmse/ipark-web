@@ -25,7 +25,7 @@ const validate = (email, pass, confirmPass, fName, lName, licensePlate) => {
   return {
     email: !rgEmail.test(email),
     pass: pass.length < 8,
-    confirmPass: confirmPass !== pass,
+    confirmPass: confirmPass !== pass || confirmPass.length === 0,
     fName: !rgName.test(fName),
     lName: !rgName.test(lName),
     licensePlate: licensePlate.length < 4
@@ -39,7 +39,16 @@ export default class SignupForm extends Component {
     confirmPass: '',
     fName: '',
     lName: '',
-    licensePlate: ''
+    licensePlate: '',
+
+    touched: {
+      email: false,
+      pass: false,
+      confirmPass: false,
+      fName: false,
+      lName: false,
+      licensePlate: false
+    }
   }
 
   canBeSubmitted = () => {
@@ -57,27 +66,35 @@ export default class SignupForm extends Component {
     e.preventDefault()
     console.log(this.state.email)
   }
+
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value })
   }
+
+  handleBlur = e => {
+    this.setState({ touched: { ...this.state.touched, [e.target.name]: true } })
+  }
+
   render() {
     const errors = validate(this.state.email, this.state.pass, this.state.confirmPass, this.state.fName, this.state.lName, this.state.licensePlate)
     const isDisabled = Object.keys(errors).some(i => errors[i])
+
+    const shouldMarkError = field => errors[field] && this.state.touched[field]
 
     return (
       <Form onSubmit={this.handleSubmit}>
         <Title>WELCOME TO IPARK</Title>
         <GridWrapper>
           <NameGrid>
-            <Input type='text' name='fName' placeholder='first name' onChange={this.handleChange} required />
-            <Input type='text' name='lName' placeholder='last name' onChange={this.handleChange} required />
+            <Input type='text' name='fName' placeholder='first name' onChange={this.handleChange} onBlur={this.handleBlur} error={shouldMarkError('fName')} required />
+            <Input type='text' name='lName' placeholder='last name' onChange={this.handleChange} onBlur={this.handleBlur} error={shouldMarkError('lName')} required />
           </NameGrid>
-          <Input type='email' name='email' placeholder='email' onChange={this.handleChange} required />
-          <Input type='password' name='pass' placeholder='password' onChange={this.handleChange} required />
-          <Input type='password' name='confirmPass' placeholder='confirm password' onChange={this.handleChange} required />
-          <Input type='text' name='licensePlate' placeholder='license plate' onChange={this.handleChange} required />
+          <Input type='email' name='email' placeholder='email' onChange={this.handleChange} onBlur={this.handleBlur} error={shouldMarkError('email')} required />
+          <Input type='password' name='pass' placeholder='password' onChange={this.handleChange} onBlur={this.handleBlur} error={shouldMarkError('pass')} required />
+          <Input type='password' name='confirmPass' placeholder='confirm password' onChange={this.handleChange} onBlur={this.handleBlur} error={shouldMarkError('confirmPass')} required />
+          <Input type='text' name='licensePlate' placeholder='license plate' onChange={this.handleChange} onBlur={this.handleBlur} error={shouldMarkError('licensePlate')} required />
         </GridWrapper>
-        <Button type='submit'>Sign Up</Button>
+        <Button disabled={isDisabled} type='submit'>Sign Up</Button>
       </Form>
     )
   }

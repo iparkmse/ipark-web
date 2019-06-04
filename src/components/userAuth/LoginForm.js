@@ -54,8 +54,9 @@ export const Input = styled.input`
   padding: 5px 15px;
   /*background-color: none;*/
   background-color: #666666;
-  border: 3px solid #FFFF;
   border-radius: 3px;
+
+  border: ${props => props.error ? '3px solid red' : '3px solid #FFFF'};
 `
 
 const LabelSmall = styled.label`
