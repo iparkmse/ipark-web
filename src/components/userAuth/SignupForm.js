@@ -70,6 +70,7 @@ export default class SignupForm extends Component {
     console.log('sign up successfully')
     auth.createUserWithEmailAndPassword(this.state.email, this.state.pass).then(cred => {
       db.ref('users/' + `${this.state.fName}_${this.state.lName}_${cred.user.uid}`).set({
+        uid: cred.user.uid,
         first_name: this.state.fName,
         last_name: this.state.lName,
         email: this.state.email,
