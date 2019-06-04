@@ -4,10 +4,11 @@ import { Button, Form, Input, Title } from './LoginForm'
 import firebaseApp from '../../firebase'
 
 const GridWrapper = styled.div`
-  display: inline-grid;
+  display: grid;
   grid-template-columns: 400px;
   grid-template-rows: 40px 40px 40px 40px 40px;
   row-gap: 10px;
+  justify-content: center;
   margin-bottom: 20px;
 `
 
@@ -104,7 +105,6 @@ export default class SignupForm extends Component {
           <Input type='password' name='confirmPass' placeholder='confirm password' onChange={this.handleChange} onBlur={this.handleBlur} error={shouldMarkError('confirmPass')} required />
           <Input type='text' name='licensePlate' placeholder='license plate' onChange={this.handleChange} onBlur={this.handleBlur} error={shouldMarkError('licensePlate')} required />
         </GridWrapper>
-        <br />
         <Button disabled={isDisabled} type='submit'>Sign Up</Button>
       </Form>
     )
