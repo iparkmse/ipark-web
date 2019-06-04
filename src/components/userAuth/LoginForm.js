@@ -26,25 +26,31 @@ export const Title = styled.label`
 const Label = styled.label`
   display: inline-block; 
   margin: 10px 10px 10px 10px;
-  color: #FFFFFF; /* White */
+  color: white;
   font-size: 22px;
   letter-spacing: 1px;
 `
 
 export const Button = styled.button`
-  background: #AEABAB;
-  color: #FFFFFF;
-  border: 2px solid #AEABAB;
+  background: steelblue;
+  color: white;
+  border: 2px solid steelblue;
   border-radius: 3px;
   margin: 0 0 10px 0;
   /*padding: 12px 16px;*/
   font-size: 25px;
   letter-spacing: 1px;
+
+  &:disabled {
+    background: #AEABAB;
+    border: 2px solid #AEABAB;
+    cursor: not-allowed;
+  }
 `
 
 const ALink = styled.a`
   font-family: 'Gill Sans', sans-serif;
-  color: #FFFFFF;
+  color: white;
   text-decoration: none;
 `
 
