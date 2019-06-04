@@ -32,6 +32,9 @@ const validate = (email, pass, confirmPass, fName, lName, licensePlate) => {
   }
 }
 
+const auth = firebaseApp.auth()
+const db = firebaseApp.database()
+
 export default class SignupForm extends Component {
   state = {
     email: '',
@@ -64,7 +67,15 @@ export default class SignupForm extends Component {
       return
     }
     e.preventDefault()
-    console.log(this.state.email)
+    console.log('sign up successfully')
+    auth.createUserWithEmailAndPassword(this.state.email, this.state.pass).then(cred => {
+      db.ref('users/' + `${this.state.fName}_${this.state.lName}_${cred.user.uid}`).set({
+        first_name: this.state.fName,
+        last_name: this.state.lName,
+        email: this.state.email,
+        licensePlate: this.state.licensePlate
+      })
+    })
   }
 
   handleChange = (e) => {
