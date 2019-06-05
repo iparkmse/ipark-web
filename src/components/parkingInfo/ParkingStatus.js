@@ -7,15 +7,18 @@ import Spinner from '../util/Spinner'
 import firebaseApp from '../../firebase'
 
 const Wrapper = styled.div`
-  background-color: rgba(0, 0, 0, 0.6);  // Black with Transparency of 40%
+  background-color: rgba(0, 0, 0, 0.6);  /* Black with Transparency of 40% */
   display: inline-block;
-  padding: 60px 130px;
+  padding: 60px 0;
+  width: 100%;
+  height: 80vh;
 `
 
 const GridWrapper = styled.div`
   display: grid;
   grid-template-columns: 221px 418px;
   grid-template-rows: 310px 113px;
+  justify-content: center;
 `
 
 const SummaryCell = styled.div`
@@ -23,7 +26,6 @@ const SummaryCell = styled.div`
 `
 
 const StatusCell = styled.div`
-  padding: 1px 30px 1px 30px;
   grid-column: 2 / 3;
   grid-row: 1 / 3;
 `
