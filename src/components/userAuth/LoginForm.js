@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import firebaseApp from '../../firebase'
@@ -48,11 +49,11 @@ export const Button = styled.button`
   }
 `
 
-const ALink = styled.a`
-  font-family: 'Gill Sans', sans-serif;
-  color: white;
-  text-decoration: none;
-`
+const LinkStyle = {
+  fontFamily: 'Gill Sans, sans-serif',
+  color: 'white',
+  textDecoration: 'none'
+}
 
 export const Input = styled.input`
   font-size: 15px;
@@ -128,7 +129,7 @@ class LoginForm extends Component {
             <br/>
             <Button type='submit'>LOGIN</Button>
             <br/>
-            <LabelSmall><ALink href='https://github.com/iparkmse'>Forget Password</ALink></LabelSmall>
+            <LabelSmall><Link to='/signup' style={LinkStyle}>Forget Password</Link></LabelSmall> {/* TODO: create reset-pass component */}
             <br/>
           </Form>
         </div>
