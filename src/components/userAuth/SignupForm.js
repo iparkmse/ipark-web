@@ -106,7 +106,7 @@ export default class SignupForm extends Component {
           <Input type='password' name='confirmPass' placeholder='confirm password' onChange={this.handleChange} onBlur={this.handleBlur} error={shouldMarkError('confirmPass')} required />
           <Input type='text' name='licensePlate' placeholder='license plate' onChange={this.handleChange} onBlur={this.handleBlur} error={shouldMarkError('licensePlate')} required />
         </GridWrapper>
-        <Button disabled={isDisabled} type='submit'>Sign Up</Button>
+        <Button disabled={isDisabled} type='submit'>SIGN UP</Button>
       </Form>
     )
   }

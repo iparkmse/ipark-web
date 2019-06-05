@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Spinner from '../util/Spinner'
 import firebaseApp from '../../firebase'
 
 export const Form = styled.form`
@@ -84,6 +85,7 @@ class LoginForm extends Component {
       email: null,
       password: null
     }
+
     handleSubmit = (e) => {
       e.preventDefault()
       const email = this.state.email
@@ -91,21 +93,28 @@ class LoginForm extends Component {
       auth.signInWithEmailAndPassword(email, password)
         .then(UserCredential => {
           console.log('cred valid! Login as', UserCredential.user.email)
-          this.props.handleClose()
         })
         .catch(err => {
           console.log(err.message)
         })
       console.log('Form Submitted \nEmail Adress:', this.state.email, '\nPassword:', this.state.password)
     }
+
     handleChange = (e) => {
       this.setState({ [e.target.name]: e.target.value })
     }
+
     handleCheckbox = () => {
       console.log('Remember User', this.state.email)
     }
+
     render(){
-      return (
+      const { login } = this.props
+      if (login === null) return (<Spinner />)
+
+      return (login ? (
+        <Redirect to ='/' />
+      ) : (
         <div>
           <Form className='LoginForm' onSubmit={this.handleSubmit}>
             <Title>WELCOME TO IPARK</Title>
@@ -133,12 +142,12 @@ class LoginForm extends Component {
             <br/>
           </Form>
         </div>
-      )
+      ))
     }
 }
 
 LoginForm.propTypes = {
-  handleClose: PropTypes.func
+  login: PropTypes.bool
 }
 
 export default LoginForm

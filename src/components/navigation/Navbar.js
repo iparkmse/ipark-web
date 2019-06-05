@@ -54,8 +54,8 @@ export default class Navbar extends Component {
             </Toolbar>
           </AppBar>
           <Route exact path='/' render={() => <NavHome login={login} />} />
-          <Route path='/login' component={LoginForm} />
-          <Route path='/signup' component={SignupForm} />
+          <Route path='/login' render={() => <LoginForm login={login} />} />
+          <Route path='/signup' render={() => <SignupForm login={login} />} />
         </Fragment>
       </BrowserRouter>
     )
