@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Button, Form, Input, Title } from './LoginForm'
+import SignupSuccess from './SignupSuccess'
+import Spinner from '../util/Spinner'
 import firebaseApp from '../../firebase'
 
 const GridWrapper = styled.div`
@@ -88,12 +91,17 @@ export default class SignupForm extends Component {
   }
 
   render() {
-    const errors = validate(this.state.email, this.state.pass, this.state.confirmPass, this.state.fName, this.state.lName, this.state.licensePlate)
+    const { login } = this.props
+    const { email, pass, confirmPass, fName, lName, licensePlate } = this.state
+    const errors = validate(email, pass, confirmPass, fName, lName, licensePlate)
     const isDisabled = Object.keys(errors).some(i => errors[i])
 
     const shouldMarkError = field => errors[field] && this.state.touched[field]
 
-    return (
+    if (login === null) return (<Spinner />)
+    return (login ? (
+      <SignupSuccess />
+    ) : (
       <Form onSubmit={this.handleSubmit}>
         <Title>WELCOME TO IPARK</Title>
         <GridWrapper>
@@ -108,6 +116,10 @@ export default class SignupForm extends Component {
         </GridWrapper>
         <Button disabled={isDisabled} type='submit'>SIGN UP</Button>
       </Form>
-    )
+    ))
   }
+}
+
+SignupForm.propTypes = {
+  login: PropTypes.bool
 }
