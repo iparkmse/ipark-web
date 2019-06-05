@@ -19,6 +19,7 @@ const GridWrapper = styled.div`
   grid-template-columns: 221px 418px;
   grid-template-rows: 310px 113px;
   justify-content: center;
+  margin-top: 20px;
 `
 
 const SummaryCell = styled.div`
