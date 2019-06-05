@@ -4,6 +4,7 @@ import LoginForm from '../userAuth/LoginForm'
 import Spinner from '../util/Spinner'
 import firebaseApp from '../../firebase'
 
+let unsubscribeAuth
 const auth = firebaseApp.auth()
 
 export default class NavHome extends Component {
@@ -12,11 +13,16 @@ export default class NavHome extends Component {
   }
 
   componentDidMount() {
-    auth.onAuthStateChanged(user => {
+    unsubscribeAuth = auth.onAuthStateChanged(user => {
       const isLogin = user ? true : false
       this.setState({ login: isLogin })
       console.log('login value is', this.state.login)
     })
+  }
+
+  componentWillUnmount() {
+    unsubscribeAuth()
+    console.log('NavHome unmounted')
   }
 
   render() {
