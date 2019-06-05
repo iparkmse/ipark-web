@@ -37,7 +37,6 @@ export default class Navbar extends Component {
 
   componentDidMount() {
     unsubscribeAuth = auth.onAuthStateChanged(user => {
-      console.log(user)
       const isLogin = user ? true : false
       this.setState({ login: isLogin })
       console.log('login value is', this.state.login)
@@ -47,6 +46,12 @@ export default class Navbar extends Component {
   componentWillUnmount() {
     unsubscribeAuth()
     console.log('Navbar unmounted')
+  }
+
+  logout = () => {
+    auth.signOut().then(() => {
+      console.log('user signed out')
+    })
   }
 
   render() {
@@ -61,6 +66,7 @@ export default class Navbar extends Component {
               <Button component={NavLink} exact to='/' style={BtnStyle} activeStyle={peruEffects}>Parking Status</Button>
               <Button component={NavLink} to='/login' style={BtnStyle} activeStyle={peruEffects}>Login</Button>
               <Button component={NavLink} to='/signup' style={BtnStyle} activeStyle={peruEffects}>Signup</Button>
+              <Button style={BtnStyle} onClick={this.logout}>Logout</Button>
             </Toolbar>
           </AppBar>
           <Route exact path='/' render={() => <NavHome login={this.state.login} />} />
