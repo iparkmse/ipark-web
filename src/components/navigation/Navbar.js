@@ -30,7 +30,6 @@ export default class Navbar extends Component {
     unsubscribeAuth = auth.onAuthStateChanged(user => {
       const isLogin = user ? true : false
       this.setState({ login: isLogin })
-      console.log('login value is', this.state.login)
     })
   }
 
@@ -48,7 +47,7 @@ export default class Navbar extends Component {
           <AppBar position="fixed" style={BarStyle}>
             <Toolbar>
               <ImgWrapper>
-                <img src={require('../../img/ipark_logo.png')} alt='missing image' />
+                <img src={require('../../img/ipark_logo.png')} alt='ipark' />
               </ImgWrapper>
               <NavContent login={login} />
             </Toolbar>
