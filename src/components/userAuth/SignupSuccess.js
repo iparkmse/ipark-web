@@ -13,6 +13,7 @@ const Wrapper = styled.div`
   font-family: 'Gill Sans', sans-serif;
   font-size: 20px;
   color: white;
+  line-height: 2.0;
 `
 
 const SignupSuccess = () => {

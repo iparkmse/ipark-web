@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ParkingStatus from '../parkingInfo/ParkingStatus'
-import LoginForm from '../userAuth/LoginForm'
+import LoginReminder from '../userAuth/LoginReminder'
 import Spinner from '../util/Spinner'
 
 const NavHome = ({login}) => {
   if (login === null) return (<Spinner />)
-  return (login ? <ParkingStatus /> : <LoginForm />)
+  return (login ? <ParkingStatus /> : <LoginReminder />)
 }
 
 NavHome.propTypes = {
