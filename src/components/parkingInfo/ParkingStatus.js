@@ -68,15 +68,16 @@ class ParkingStatus extends Component {
   }
 
   render(){
+    const { stalls, number } = this.state
     if (
-      this.state.stalls.length === this.state.number
-      && !this.state.stalls.includes(undefined) // prevent StatusTable to crash when updating stalls
+      stalls.length === number
+      && !stalls.includes(undefined) // prevent StatusTable to crash when updating stalls
     ) {
       return (
         <Wrapper>
           <GridWrapper>
-            <SummaryCell><StatusSummary data={this.state.stalls}/></SummaryCell>
-            <StatusCell><StatusTable data={this.state.stalls}/></StatusCell>
+            <SummaryCell><StatusSummary data={stalls}/></SummaryCell>
+            <StatusCell><StatusTable data={stalls}/></StatusCell>
             <LegendCell><StatusLegend/></LegendCell>
           </GridWrapper>
         </Wrapper>
