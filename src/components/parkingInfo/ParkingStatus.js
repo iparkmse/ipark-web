@@ -46,14 +46,11 @@ class ParkingStatus extends Component {
   componentDidMount() {
     db.ref('stalls').once('value')
       .then(snapshot => {
-        let stallsData = snapshot.val()
-        let tmpArr = []
-        for (let stall in stallsData) {
-          tmpArr.push(stallsData[stall])
-        }
+        const stallsData = snapshot.val()  // {stallA1: {...}, stallA2: {...}, ..., stallB5: {...}}
+        const stallsArr = Object.values(stallsData)
         this.setState({
-          stalls: tmpArr,
-          number: tmpArr.length
+          stalls: stallsArr,
+          number: stallsArr.length
         })
       }, err => console.log(err))
   }
@@ -64,6 +61,10 @@ class ParkingStatus extends Component {
       copyStalls[childSnapshot.val().index] = childSnapshot.val()
       this.setState({ stalls: copyStalls })
     }, err => console.log(err))
+  }
+
+  componentWillUnmount() {
+    db.ref('stalls').off()
   }
 
   render(){
