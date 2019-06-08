@@ -5,11 +5,13 @@ import styled from 'styled-components'
 const BookedCell = styled.div`
   background-color: papayawhip;
   border: 1px black solid;
+  border-left: none;
 `
 
 const FreeCell = styled.div`
   background-color: white;
   border: 1px black solid;
+  border-left: none;
 `
 
 
