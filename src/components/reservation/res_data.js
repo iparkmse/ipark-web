@@ -4,13 +4,13 @@ const RES_DATA = {
       'seven': {
         'index': 0,
         'bookingID': '',
-        'uid': '',
+        'uid': 'iojfiosdaj09a1',
         'bookingRef': ''
       },
       'eight': {
         'index': 1,
         'bookingID': '',
-        'uid': '',
+        'uid': 'hoivdsioaf12',
         'bookingRef': ''
       },
       'nine': {
@@ -217,8 +217,8 @@ const RES_DATA = {
       },
       'six': {
         'index': 35,
-        'bookingID': 'absucais12',
-        'uid': '',
+        'bookingID': '',
+        'uid': 'absucais12',
         'bookingRef': ''
       }
     }

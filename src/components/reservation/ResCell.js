@@ -3,11 +3,13 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const BookedCell = styled.div`
-  background-color: #D8E2F3;
+  background-color: papayawhip;
+  border: 1px black solid;
 `
 
 const FreeCell = styled.div`
-  background-color: white
+  background-color: white;
+  border: 1px black solid;
 `
 
 
