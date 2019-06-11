@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { format, addDays } from 'date-fns'
 import Grid from '@material-ui/core/Grid'
 import List from '@material-ui/core/List'
@@ -7,7 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
 
-const dayOne = format(addDays(new Date(), 1), 'MMM Do, dddd')
+export const dayOne = format(addDays(new Date(), 1), 'MMM Do, dddd')
 const dayTwo = format(addDays(new Date(), 2), 'MMM Do, dddd')
 const dayThree = format(addDays(new Date(), 3), 'MMM Do, dddd')
 
@@ -32,7 +33,7 @@ export default class ResCalendar extends Component {
     this.setState({
       selectedIndex: index,
       anchorEl: null
-    })
+    }, () => this.props.resMainHandler(options[index]))
   }
 
   handleClose = () => {
@@ -76,4 +77,8 @@ export default class ResCalendar extends Component {
       </Grid>
     )
   }
+}
+
+ResCalendar.propTypes = {
+  resMainHandler: PropTypes.func
 }
