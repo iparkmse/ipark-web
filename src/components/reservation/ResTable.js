@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import styled from 'styled-components'
 import ResCell from './ResCell'
-import RES_DATA from './res_data'
+import Spinner from '../util/Spinner'
 
 const Wrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.6);  /* Black with Transparency of 40% */
@@ -43,9 +43,6 @@ const Header = () => {
   )
 }
 
-const resStalls = Object.keys(RES_DATA)
-const resInfo = resStalls.map(stall => Object.values(RES_DATA[stall]))
-
 const times = ['7:00', '8:00', '9:00', '10:00', '11:00', '12:00',
   '13:00', '14:00', '15:00', '16:00', '17:00', '18:00']
 
@@ -59,20 +56,26 @@ const TimeCol = () => times.map(time => {
 
 export default class ResTable extends Component {
   render() {
-    return (
-      <Wrapper>
-        <Header />
-        <ResGrid>
-          <TimeCol />
-          {resInfo.map(stalls => stalls.map(stall => {
-            return (
-              <Fragment key={stall.index}>
-                <ResCell uid={stall.uid} />
-              </Fragment>
-            )
-          }))}
-        </ResGrid>
-      </Wrapper>
-    )
+    const { resData } = this.props
+    if (resData) {
+      const resStalls = Object.keys(resData)
+      const resInfo = resStalls.map(stall => Object.values(resData[stall]))
+      return (
+        <Wrapper>
+          <Header />
+          <ResGrid>
+            <TimeCol />
+            {resInfo.map(stalls => stalls.map(stall => {
+              return (
+                <Fragment key={stall.index}>
+                  <ResCell uid={stall.uid} />
+                </Fragment>
+              )
+            }))}
+          </ResGrid>
+        </Wrapper>
+      )
+    }
+    return <Spinner />
   }
 }

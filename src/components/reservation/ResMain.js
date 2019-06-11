@@ -6,17 +6,26 @@ import RES_DATA from './res_data'
 import firebaseApp from '../../firebase'
 
 const db = firebaseApp.database()
-const reservationRef = db.ref('reservation/Jun13')
-reservationRef.once('value')
-  .then(snapshot => {
-    if (!snapshot.child('Jun13').exists()) {
-      reservationRef.set(RES_DATA)
-    }
-  })
 
 export default class ResMain extends Component {
   state = {
-    date: reformattedDays[0]
+    date: reformattedDays[0],
+    resData: null
+  }
+
+  componentDidMount() {
+    reformattedDays.forEach(day => {
+      const reservationRef = db.ref(`reservation/${day}`)
+      reservationRef.once('value')
+        .then(snapshot => {
+          if (!snapshot.exists()) {
+            reservationRef.set(RES_DATA)
+            console.log('created data for', day)
+          }
+        })
+    })
+    db.ref(`reservation/${reformattedDays[0]}`).once('value')
+      .then(snapshot => this.setState({ resData: snapshot.val()}))
   }
 
   getDate = ResCalendarData => {
@@ -24,11 +33,12 @@ export default class ResMain extends Component {
   }
 
   render() {
+    const { date, resData } = this.state
     return (
       <Fragment>
         <ResCalendar resMainHandler={this.getDate}/>
-        <p>{this.state.date}</p>
-        <ResTable />
+        <p>{date}</p>
+        <ResTable resData={resData}/>
       </Fragment>
     )
   }
