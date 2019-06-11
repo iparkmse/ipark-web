@@ -12,6 +12,7 @@ import NavItem from '../src/components/navigation/NavItem'
 import NavHome from '../src/components/navigation/NavHome'
 import ParkingStatus from '../src/components/parkingInfo/ParkingStatus'
 import ResTable from '../src/components/reservation/ResTable'
+import ResCalendar from '../src/components/reservation/ResCalendar'
 
 let buttonStyle = {
   backgroundColor: 'green',
@@ -66,4 +67,7 @@ storiesOf('React Component', module)
   ))
   .add('Reservation table', () => (
     <ResTable />
+  ))
+  .add('Reservation calendar', () => (
+    <ResCalendar />
   ))
