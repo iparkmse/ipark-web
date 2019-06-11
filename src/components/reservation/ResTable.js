@@ -43,8 +43,8 @@ const Header = () => {
   )
 }
 
-const resStalls = Object.keys(RES_DATA.reservation)
-const resInfo = resStalls.map(stall => Object.values(RES_DATA.reservation[stall]))
+const resStalls = Object.keys(RES_DATA)
+const resInfo = resStalls.map(stall => Object.values(RES_DATA[stall]))
 
 const times = ['7:00', '8:00', '9:00', '10:00', '11:00', '12:00',
   '13:00', '14:00', '15:00', '16:00', '17:00', '18:00']
@@ -59,8 +59,6 @@ const TimeCol = () => times.map(time => {
 
 export default class ResTable extends Component {
   render() {
-    console.log(resInfo)
-    console.log(resInfo[0])
     return (
       <Wrapper>
         <Header />
