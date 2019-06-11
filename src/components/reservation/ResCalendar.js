@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { format, addDays } from 'date-fns'
-// import styled from 'styled-components'
+import Grid from '@material-ui/core/Grid'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
@@ -42,7 +42,7 @@ export default class ResCalendar extends Component {
   render() {
     const { anchorEl, selectedIndex } = this.state
     return (
-      <Fragment>
+      <Grid container justify='center'>
         <List component="nav">
           <ListItem
             button
@@ -73,7 +73,7 @@ export default class ResCalendar extends Component {
             </MenuItem>
           ))}
         </Menu>
-      </Fragment>
+      </Grid>
     )
   }
 }
