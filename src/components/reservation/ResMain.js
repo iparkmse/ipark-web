@@ -34,6 +34,7 @@ export default class ResMain extends Component {
 
   render() {
     const { date, resData } = this.state
+
     return (
       <Fragment>
         <ResCalendar resMainHandler={this.getDate}/>
