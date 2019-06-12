@@ -39,7 +39,7 @@ export default class ResMain extends Component {
   }
 
   updateRes = (ResCalendarData, index) => {
-    this.setState({ 
+    this.setState({
       date: ResCalendarData,
       resData: this.state.dbData[index]
     })
