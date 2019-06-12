@@ -6,32 +6,43 @@ import RES_DATA from './res_data'
 import firebaseApp from '../../firebase'
 
 const db = firebaseApp.database()
+const dayLength = reformattedDays.length
 
 export default class ResMain extends Component {
   state = {
     date: reformattedDays[0],
-    resData: null
+    resData: null,
+    dbData: new Array(dayLength)
   }
 
   componentDidMount() {
+    let i = 0
+    let tempDbData = new Array(dayLength)
     reformattedDays.forEach(day => {
       const reservationRef = db.ref(`reservation/${day}`)
       reservationRef.once('value')
         .then(snapshot => {
           if (!snapshot.exists()) {
             reservationRef.set(RES_DATA)
+            tempDbData[i++] = RES_DATA
             console.log('created data for', day)
+          }
+          else tempDbData[i++] = snapshot.val()
+          if (i === dayLength) {
+            this.setState({
+              resData: tempDbData[0],
+              dbData: tempDbData
+            })
           }
         })
     })
-    db.ref(`reservation/${reformattedDays[0]}`).once('value')
-      .then(snapshot => this.setState({ resData: snapshot.val()}))
   }
 
   updateRes = (ResCalendarData, index) => {
-    this.setState({ date: ResCalendarData })
-    db.ref(`reservation/${reformattedDays[index]}`).once('value')
-      .then(snapshot => this.setState({ resData: snapshot.val()}))
+    this.setState({ 
+      date: ResCalendarData,
+      resData: this.state.dbData[index]
+    })
   }
 
   render() {
