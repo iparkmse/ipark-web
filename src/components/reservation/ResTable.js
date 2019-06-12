@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import ResCell from './ResCell'
 import Spinner from '../util/Spinner'
@@ -78,4 +79,8 @@ export default class ResTable extends Component {
     }
     return <Spinner />
   }
+}
+
+ResTable.propTypes = {
+  resData: PropTypes.object
 }
