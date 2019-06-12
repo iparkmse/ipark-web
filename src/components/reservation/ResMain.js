@@ -28,8 +28,10 @@ export default class ResMain extends Component {
       .then(snapshot => this.setState({ resData: snapshot.val()}))
   }
 
-  getDate = ResCalendarData => {
+  updateRes = (ResCalendarData, index) => {
     this.setState({ date: ResCalendarData })
+    db.ref(`reservation/${reformattedDays[index]}`).once('value')
+      .then(snapshot => this.setState({ resData: snapshot.val()}))
   }
 
   render() {
@@ -37,7 +39,7 @@ export default class ResMain extends Component {
 
     return (
       <Fragment>
-        <ResCalendar resMainHandler={this.getDate}/>
+        <ResCalendar resMainHandler={this.updateRes}/>
         <p>{date}</p>
         <ResTable resData={resData}/>
       </Fragment>

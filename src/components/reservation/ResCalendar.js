@@ -32,7 +32,7 @@ export default class ResCalendar extends Component {
     this.setState({
       selectedIndex: index,
       anchorEl: null
-    }, () => this.props.resMainHandler(reformattedDays[index]))
+    }, () => this.props.resMainHandler(reformattedDays[index], index))
   }
 
   handleClose = () => {
