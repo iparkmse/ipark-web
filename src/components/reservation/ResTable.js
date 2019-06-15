@@ -15,7 +15,7 @@ const ResGrid = styled.div`
   grid-template-rows: repeat(12, 50px);
   grid-gap: 0;
   grid-auto-flow: column;
-  grid-template-columns: 40px;
+  grid-template-columns: 50px;
   grid-auto-columns: 200px;
   justify-content: center;
 `
@@ -27,16 +27,16 @@ const Label = styled.span`
 
 const HeaderGrid = styled.div`
   display: grid;
-  grid-template-columns: 40px 200px 200px 200px;
+  grid-template-columns: 50px 200px 200px 200px;
   grid-template-rows: 20px;
   justify-content: center;
   text-align: center;
 `
 
-const Header = () => {
+const Header = ({ date }) => {
   return (
     <HeaderGrid>
-      <Label>Time:</Label>
+      <Label>{date}</Label>
       <Label>A1</Label>
       <Label>A2</Label>
       <Label>A3</Label>
@@ -57,13 +57,13 @@ const TimeCol = () => times.map(time => {
 
 export default class ResTable extends Component {
   render() {
-    const { resData } = this.props
+    const { date, resData } = this.props
     if (resData) {
       const resStalls = Object.keys(resData)
       const resInfo = resStalls.map(stall => Object.values(resData[stall]))
       return (
         <Wrapper>
-          <Header />
+          <Header date={date}/>
           <ResGrid>
             <TimeCol />
             {resInfo.map(stalls => stalls.map(stall => {
@@ -81,6 +81,11 @@ export default class ResTable extends Component {
   }
 }
 
+Header.propTypes = {
+  date: PropTypes.string
+}
+
 ResTable.propTypes = {
+  date: PropTypes.string,
   resData: PropTypes.object
 }

@@ -67,8 +67,7 @@ export default class ResMain extends Component {
     return (
       <Fragment>
         <ResCalendar resMainHandler={this.updateRes}/>
-        <p>{date}</p>
-        <ResTable resData={resData}/>
+        <ResTable date={date} resData={resData}/>
       </Fragment>
     )
   }
