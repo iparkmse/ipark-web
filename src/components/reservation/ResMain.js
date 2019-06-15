@@ -31,11 +31,9 @@ export default class ResMain extends Component {
           if (!snapshot.exists()) {
             reservationRef.set(RES_DATA)
             tempDbData[i] = RES_DATA
-            console.log('created data for', day)
           }
           else tempDbData[i] = snapshot.val()
           if (i === dayLength - 1) {
-            console.log(tempDbData)
             this.setState({
               resData: tempDbData[0],
               dbData: tempDbData
@@ -46,13 +44,20 @@ export default class ResMain extends Component {
   }
 
   componentDidUpdate() {
-    reformattedDays.forEach(day => {
-      let copy = this.state.dbData  // ds: [ {}, ..., {} ]
+    let copy = this.state.dbData  // ds: [ {}, ..., {} ]
+    reformattedDays.forEach((day, i) => {
       const reservationRef = db.ref(`reservation/${day}`)
       reservationRef.on('child_changed', childSnapshot => {
-        console.log(childSnapshot.val().a7)
-        console.log(childSnapshot.val())
+        const stallName = childSnapshot.key  // i.e. stallA1
+        copy[i][stallName] = childSnapshot.val()
+        this.setState({ dbData: copy })
       })
+    })
+  }
+
+  componentWillUnmount() {
+    reformattedDays.forEach(day => {
+      db.ref(`reservation/${day}`).off()
     })
   }
 
