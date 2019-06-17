@@ -7,6 +7,7 @@ import NavContent from './NavContent'
 import NavHome from './NavHome'
 import LoginForm from '../userAuth/LoginForm'
 import SignupForm from '../userAuth/SignupForm'
+import ResMain from '../reservation/ResMain'
 import Spinner from '../util/Spinner'
 import firebaseApp from '../../firebase'
 
@@ -55,6 +56,7 @@ export default class Navbar extends Component {
           <Route exact path='/' render={() => <NavHome login={login} />} />
           <Route path='/login' render={() => <LoginForm login={login} />} />
           <Route path='/signup' render={() => <SignupForm login={login} />} />
+          <Route path='/reservation' render={() => <ResMain login={login} />} />
         </Fragment>
       </BrowserRouter>
     )

@@ -1,12 +1,20 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import ResCalendar from './ResCalendar'
 import { reformattedDays } from './ResCalendar'
 import ResTable from './ResTable'
 import RES_DATA from './res_data'
+import LoginReminder from '../userAuth/LoginReminder'
+import Spinner from '../util/Spinner'
 import firebaseApp from '../../firebase'
 
 const db = firebaseApp.database()
 const dayLength = reformattedDays.length
+
+const Wrapper = styled.div`
+  margin-top: 60px;
+`
 
 export default class ResMain extends Component {
   updateRes = (ResCalendarData, index) => {
@@ -62,13 +70,21 @@ export default class ResMain extends Component {
   }
 
   render() {
+    const { login } = this.props
     const { date, resData } = this.state
 
-    return (
-      <Fragment>
+    if (login === null) return (<Spinner />)
+    return (login ? (
+      <Wrapper>
         <ResCalendar resMainHandler={this.updateRes}/>
         <ResTable date={date} resData={resData}/>
-      </Fragment>
-    )
+      </Wrapper>
+    ) : (
+      <LoginReminder />
+    ))
   }
+}
+
+ResMain.propTypes = {
+  login: PropTypes.bool
 }
