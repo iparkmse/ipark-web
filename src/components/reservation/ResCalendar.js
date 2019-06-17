@@ -8,19 +8,18 @@ import ListItemText from '@material-ui/core/ListItemText'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
 
-export const dayOne = format(addDays(new Date(), 1), 'MMM Do, dddd')
-const dayTwo = format(addDays(new Date(), 2), 'MMM Do, dddd')
-const dayThree = format(addDays(new Date(), 3), 'MMM Do, dddd')
+const reservabledDays = 3
+let days = new Array(reservabledDays)
+let reformattedDays = new Array(reservabledDays)
+for (let i=0; i<reservabledDays; i++) {
+  days[i] = (format(addDays(new Date(), i+1), 'MMM Do, dddd'))  // i.e. Jun 11th, Tuesday
+  reformattedDays[i] = (format(addDays(new Date(), i+1), 'MMMD'))  // i.e. Jun11
+}
 
-const options = [
-  dayOne,
-  dayTwo,
-  dayThree,
-]
+export { reformattedDays }
 
 export default class ResCalendar extends Component {
   state = {
-    date: '',
     anchorEl: null,
     selectedIndex: 0
   }
@@ -33,7 +32,7 @@ export default class ResCalendar extends Component {
     this.setState({
       selectedIndex: index,
       anchorEl: null
-    }, () => this.props.resMainHandler(options[index]))
+    }, () => this.props.resMainHandler(reformattedDays[index], index))
   }
 
   handleClose = () => {
@@ -52,7 +51,7 @@ export default class ResCalendar extends Component {
             onClick={this.handleClickListItem}
           >
             <ListItemText
-              primary={options[selectedIndex]}
+              primary={days[selectedIndex]}
               secondary='click to choose a different date for reservation'
             />
           </ListItem>
@@ -64,13 +63,13 @@ export default class ResCalendar extends Component {
           open={Boolean(anchorEl)}
           onClose={this.handleClose}
         >
-          {options.map((option, index) => (
+          {days.map((day, index) => (
             <MenuItem
-              key={option}
+              key={day}
               selected={index === selectedIndex}
               onClick={e => this.handleMenuItemClick(e, index)}
             >
-              {option}
+              {day}
             </MenuItem>
           ))}
         </Menu>

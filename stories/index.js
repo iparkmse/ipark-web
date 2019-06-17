@@ -9,11 +9,9 @@ import LoginForm from '../src/components/userAuth/LoginForm'
 import SignupForm from '../src/components/userAuth/SignupForm'
 import Navbar from '../src/components/navigation/Navbar'
 import NavItem from '../src/components/navigation/NavItem'
-import NavHome from '../src/components/navigation/NavHome'
 import ParkingStatus from '../src/components/parkingInfo/ParkingStatus'
 import ResCalendar from '../src/components/reservation/ResCalendar'
 import ResMain from '../src/components/reservation/ResMain'
-import ResTable from '../src/components/reservation/ResTable'
 
 
 let buttonStyle = {
@@ -63,12 +61,6 @@ storiesOf('React Component', module)
   ))
   .add('Navigation item', () => (
     <NavItem itemTitle='login' itemContent={<LoginForm />} />
-  ))
-  .add('Navigation home', () => (
-    <NavHome />
-  ))
-  .add('Reservation table', () => (
-    <ResTable />
   ))
   .add('Reservation calendar', () => (
     <ResCalendar />
