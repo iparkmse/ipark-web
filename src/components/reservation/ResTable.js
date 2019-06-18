@@ -44,7 +44,8 @@ const Header = ({ date }) => {
   )
 }
 
-const times = ['7:00', '8:00', '9:00', '10:00', '11:00', '12:00',
+export const stalls = ['A1', 'A2', 'A3']
+export const times = ['7:00', '8:00', '9:00', '10:00', '11:00', '12:00',
   '13:00', '14:00', '15:00', '16:00', '17:00', '18:00']
 
 const TimeCol = () => times.map(time => {

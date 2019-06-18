@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import PropTypes from 'prop-types'
 import Button from '@material-ui/core/Button'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormControl from '@material-ui/core/FormControl'
@@ -8,6 +9,7 @@ import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
+import { stalls, times } from './ResTable'
 
 
 const modalStyle = {
@@ -24,18 +26,8 @@ const modalStyle = {
   border: '1px solid rgba(0, 0, 0, 0.3)'
 }
 
-const stallOptions = ['A1', 'A2', 'A3']
-const timeOptions = ['7:00', '8:00', '9:00', '10:00', '11:00', '12:00',
-  '13:00', '14:00', '15:00', '16:00', '17:00', '18:00']
-
 export default class ResModal extends Component {
-  state = {
-    open: false,
-    plates: '',
-    stall: 'A1',
-    time: '7:00',
-    hours: '1',
-  }
+  state = {...this.props}
 
   handleOpen = () => {
     this.setState({ open: true })
@@ -43,17 +35,28 @@ export default class ResModal extends Component {
 
   handleClose = () => {
     this.setState({ open: false })
+    this.props.closeHandler()
   }
 
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value })
   }
 
+  componentDidUpdate(oldProps) {
+    const newProps = this.props
+    if (oldProps.open !== newProps.open) {
+      this.setState({
+        open: newProps.open,
+        time: newProps.time,
+        stall: newProps.stall
+      })
+    }
+  }
+
   render() {
     const { open, plates, stall, time, hours } = this.state
     return (
       <Fragment>
-        <button onClick={this.handleOpen}>Open modal</button>
         <Modal
           aria-labelledby='reservation-form-modal'
           aria-describedby='form-to-make-a-reservation'
@@ -91,7 +94,7 @@ export default class ResModal extends Component {
               margin='normal'
               variant='outlined'
             >
-              {stallOptions.map(stall => (
+              {stalls.map(stall => (
                 <option key={stall} value={stall}>
                   {stall}
                 </option>
@@ -111,7 +114,7 @@ export default class ResModal extends Component {
               margin='normal'
               variant='outlined'
             >
-              {timeOptions.map(time => (
+              {times.map(time => (
                 <option key={time} value={time}>
                   {time}
                 </option>
@@ -139,4 +142,8 @@ export default class ResModal extends Component {
       </Fragment>
     )
   }
+}
+
+ResModal.propTypes = {
+  closeHandler: PropTypes.func
 }

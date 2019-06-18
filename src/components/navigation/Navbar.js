@@ -1,4 +1,4 @@
-import React, { Component, Fragment }  from 'react'
+import React, { Component }  from 'react'
 import styled from 'styled-components'
 import { BrowserRouter, Route } from 'react-router-dom'
 import AppBar from '@material-ui/core/AppBar'
@@ -33,7 +33,7 @@ export default class Navbar extends Component {
     unsubscribeAuth = auth.onAuthStateChanged(user => {
       const isLogin = user ? true : false
       const uid = user? user.uid : null
-      this.setState({ 
+      this.setState({
         login: isLogin,
         uid: uid
       })
