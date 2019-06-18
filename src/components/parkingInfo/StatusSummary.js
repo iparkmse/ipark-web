@@ -18,7 +18,7 @@ const CellHeader = styled.td`
 
 const CellGreen = styled.td`
   border: 3px solid #666666;
-  padding: 10px 10px 10px 10px;
+  padding: 4px 10px 4px 10px;
   font-size: 22px;
   background: mediumseagreen;
 `
@@ -31,10 +31,21 @@ const CellRed = styled(CellGreen)`
   background: indianred;
 `
 
+const CellMaroon = styled(CellGreen)`
+  background: brown;
+`
+
+const CellBlack = styled(CellGreen)`
+  background: black;
+  color: white;
+`
+
 const StatusSummary = ({data}) => {
   let vacant = 0
   let occupied = 0
   let reserved = 0
+  let expiring = 0
+  let violated = 0
   data.forEach(d => {
     if (d.status === 'vacant') {
       vacant++
@@ -44,6 +55,12 @@ const StatusSummary = ({data}) => {
     }
     else if (d.status === 'reserved') {
       reserved++
+    }
+    else if (d.status === 'expiring') {
+      expiring++
+    }
+    else if (d.status === 'violated') {
+      violated++
     }
   })
 
@@ -63,6 +80,12 @@ const StatusSummary = ({data}) => {
         </tr>
         <tr>
           <CellRed>occupied</CellRed><CellRed>{occupied}</CellRed>
+        </tr>
+        <tr>
+          <CellMaroon>expiring</CellMaroon><CellMaroon>{expiring}</CellMaroon>
+        </tr>
+        <tr>
+          <CellBlack>violated</CellBlack><CellBlack>{violated}</CellBlack>
         </tr>
       </tbody>
     </Table>
