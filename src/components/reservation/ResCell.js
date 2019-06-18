@@ -25,18 +25,19 @@ const FreeCell = styled.div`
 `
 
 
-const ResCell = ({ uid }) => {
+const ResCell = ({ uid, index }) => {
   return (uid ? (
-    <BookedCell>
+    <BookedCell data-index={index}>
       [booked]
     </BookedCell>
   ) : (
-    <FreeCell />
+    <FreeCell data-index={index} />
   ))
 }
 
 ResCell.propTypes = {
-  uid: PropTypes.string
+  uid: PropTypes.string,
+  index: PropTypes.number
 }
 
 export default ResCell

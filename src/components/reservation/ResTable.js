@@ -69,7 +69,7 @@ export default class ResTable extends Component {
             {resInfo.map(stalls => stalls.map(stall => {
               return (
                 <Fragment key={stall.index}>
-                  <ResCell uid={stall.uid} />
+                  <ResCell uid={stall.uid} index={stall.index} />
                 </Fragment>
               )
             }))}
