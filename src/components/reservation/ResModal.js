@@ -1,7 +1,13 @@
 import React, { Component, Fragment } from 'react'
-import Typography from '@material-ui/core/Typography'
+import Button from '@material-ui/core/Button'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import FormControl from '@material-ui/core/FormControl'
+import FormLabel from '@material-ui/core/FormLabel'
 import Modal from '@material-ui/core/Modal'
+import Radio from '@material-ui/core/Radio'
+import RadioGroup from '@material-ui/core/RadioGroup'
 import TextField from '@material-ui/core/TextField'
+import Typography from '@material-ui/core/Typography'
 
 
 const modalStyle = {
@@ -25,10 +31,10 @@ const timeOptions = ['7:00', '8:00', '9:00', '10:00', '11:00', '12:00',
 export default class ResModal extends Component {
   state = {
     open: false,
-    stall: 'A1',
     plates: '',
+    stall: 'A1',
     time: '7:00',
-    hours: 0,
+    hours: '1',
   }
 
   handleOpen = () => {
@@ -44,7 +50,7 @@ export default class ResModal extends Component {
   }
 
   render() {
-    const { open } = this.state
+    const { open, plates, stall, time, hours } = this.state
     return (
       <Fragment>
         <button onClick={this.handleOpen}>Open modal</button>
@@ -59,10 +65,11 @@ export default class ResModal extends Component {
               Make a reservation
             </Typography>
             <TextField
-              id='outlined-plates-input'
+              id='outlined-input-plates'
               label='Car Plates'
               type='text'
               name='plates'
+              value={plates}
               onChange={this.handleChange}
               margin='normal'
               variant='outlined'
@@ -76,7 +83,7 @@ export default class ResModal extends Component {
               style={{width: 100, marginLeft: 10}}
               label='Stall Select'
               name='stall'
-              value={this.state.stall}
+              value={stall}
               onChange={this.handleChange}
               SelectProps={{
                 native: true
@@ -96,7 +103,7 @@ export default class ResModal extends Component {
               select
               label='Time Select'
               name='time'
-              value={this.state.time}
+              value={time}
               onChange={this.handleChange}
               SelectProps={{
                 native: true
@@ -110,6 +117,23 @@ export default class ResModal extends Component {
                 </option>
               ))}
             </TextField>
+            <FormControl component="fieldset" style={{margin: '10px 0 0 20px'}}>
+              <FormLabel component="legend" style={{fontSize: 12}}>Hours</FormLabel>
+              <RadioGroup
+                aria-label="Hours"
+                name="hours"
+                value={hours}
+                onChange={this.handleChange}
+                row
+              >
+                <FormControlLabel value='1' control={<Radio color='primary' />} label="1" />
+                <FormControlLabel value='2' control={<Radio color='primary' />} label="2" />
+                <FormControlLabel value='3' control={<Radio color='primary' />} label="3" />
+              </RadioGroup>
+            </FormControl>
+            <br />
+            <Button color='primary' type='submit' style={{margin: '30px 10px 0 0'}}>RESERVE</Button>
+            <Button style={{marginTop: 30}} onClick={this.handleClose}>CANCEL</Button>
           </form>
         </Modal>
       </Fragment>
