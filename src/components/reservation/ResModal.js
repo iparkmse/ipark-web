@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Button from '@material-ui/core/Button'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
@@ -9,6 +9,7 @@ import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import { stalls, times } from './ResTable'
 
 
@@ -25,6 +26,12 @@ const modalStyle = {
   boxShadow: '0 3px 7px rgba(0, 0, 0, 0.3)',
   border: '1px solid rgba(0, 0, 0, 0.3)'
 }
+
+const theme = createMuiTheme({
+  palette: {
+    primary: { main: '#2196f3'}
+  }
+})
 
 export default class ResModal extends Component {
   state = {...this.props}
@@ -56,7 +63,7 @@ export default class ResModal extends Component {
   render() {
     const { open, plates, stall, time, hours } = this.state
     return (
-      <Fragment>
+      <MuiThemeProvider theme={theme}>
         <Modal
           aria-labelledby='reservation-form-modal'
           aria-describedby='form-to-make-a-reservation'
@@ -139,7 +146,7 @@ export default class ResModal extends Component {
             <Button style={{marginTop: 30}} onClick={this.handleClose}>CANCEL</Button>
           </form>
         </Modal>
-      </Fragment>
+      </MuiThemeProvider>
     )
   }
 }
