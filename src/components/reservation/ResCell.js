@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -24,20 +24,20 @@ const FreeCell = styled.div`
   }
 `
 
-
-const ResCell = ({ uid, index }) => {
-  return (uid ? (
-    <BookedCell data-index={index}>
-      [booked]
-    </BookedCell>
-  ) : (
-    <FreeCell data-index={index} />
-  ))
+export default class ResCell extends Component {
+  render() {
+    const { uid, index } = this.props
+    return (uid ? (
+      <BookedCell data-index={index}>
+        [booked]
+      </BookedCell>
+    ) : (
+      <FreeCell data-index={index} />
+    ))
+  }
 }
 
 ResCell.propTypes = {
   uid: PropTypes.string,
   index: PropTypes.number
 }
-
-export default ResCell
