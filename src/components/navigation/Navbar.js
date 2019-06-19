@@ -41,9 +41,9 @@ export default class Navbar extends Component {
       })
       if (uid) {
         db.ref(`users/${uid}`).once('value')
-         .then(snapshot => {
-           this.setState({ plates: snapshot.val().licensePlate })
-         })
+          .then(snapshot => {
+            this.setState({ plates: snapshot.val().licensePlate })
+          })
       }
     })
   }

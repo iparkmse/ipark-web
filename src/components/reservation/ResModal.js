@@ -94,7 +94,7 @@ export default class ResModal extends Component {
               />
             )}
             </CredContextConsumer>
-            
+
             <TextField
               id='outlined-select-stall'
               select
