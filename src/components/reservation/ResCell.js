@@ -3,6 +3,15 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import ResModal from './ResModal'
 import { stalls, times } from './ResTable'
+import { CredContextConsumer } from '../../contexts/CredContext'
+
+const MyCell = styled.div`
+  background-color: moccasin;
+  border: 1px black solid;
+  border-left: none;
+  color: palevioletred;
+  font-weight: bold;
+`
 
 const BookedCell = styled.div`
   background-color: papayawhip;
@@ -53,15 +62,26 @@ export default class ResCell extends Component {
 
   render() {
     const { uid, index } = this.props
-    return (uid ? (
-      <BookedCell data-index={index}>
-        [booked]
-      </BookedCell>
-    ) : (
-      <FreeCell data-index={index} onClick={this.handleClick}>
-        <ResModal closeHandler={this.handleClose} {...this.state } />
-      </FreeCell>
-    ))
+
+    return (
+      <CredContextConsumer>{context => {
+        if (!uid) return (
+          <FreeCell data-index={index} onClick={this.handleClick}>
+            <ResModal closeHandler={this.handleClose} {...this.state } />
+          </FreeCell>
+        )
+        return (uid === context.myUid ? (
+          <MyCell>
+            [my booking]
+          </MyCell>
+        ) : (
+          <BookedCell data-index={index}>
+            [booked]
+          </BookedCell>
+        ))
+      }}
+      </CredContextConsumer>
+    )
   }
 }
 

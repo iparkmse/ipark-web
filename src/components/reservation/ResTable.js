@@ -8,6 +8,7 @@ const Wrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.6);  /* Black with Transparency of 40% */
   width: 100%;
   margin-top: 20px;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 `
 
 const ResGrid = styled.div`
