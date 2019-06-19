@@ -20,19 +20,20 @@ const CellGreen = styled.td`
   border: 3px solid #666666;
   padding: 4px 10px 4px 10px;
   font-size: 22px;
-  background: mediumseagreen;
+  background: ForestGreen;
 `
 
 const CellYellow = styled(CellGreen)`
-  background: goldenrod;
+  background: gold;
 `
 
 const CellRed = styled(CellGreen)`
-  background: indianred;
+  background: red;
 `
 
 const CellMaroon = styled(CellGreen)`
-  background: brown;
+  background: maroon;
+  color: white;
 `
 
 const CellBlack = styled(CellGreen)`
