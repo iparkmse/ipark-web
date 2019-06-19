@@ -22,11 +22,13 @@ const BarStyle = {
 
 let unsubscribeAuth
 const auth = firebaseApp.auth()
+const db = firebaseApp.database()
 
 export default class Navbar extends Component {
   state = {
     login: null,
-    uid: null
+    myUid: null,
+    plates: null
   }
 
   componentDidMount() {
@@ -35,8 +37,14 @@ export default class Navbar extends Component {
       const uid = user? user.uid : null
       this.setState({
         login: isLogin,
-        uid: uid
+        myUid: uid
       })
+      if (uid) {
+        db.ref(`users/${uid}`).once('value')
+         .then(snapshot => {
+           this.setState({ plates: snapshot.val().licensePlate })
+         })
+      }
     })
   }
 

@@ -29,7 +29,6 @@ const FreeCell = styled.div`
 export default class ResCell extends Component {
   state = {
     open: false,
-    plates: 'ABC123',
     stall: '',
     time: '',
     hours: '1',

@@ -11,6 +11,7 @@ import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import { stalls, times } from './ResTable'
+import { CredContextConsumer } from '../../contexts/CredContext'
 
 
 const modalStyle = {
@@ -64,7 +65,7 @@ export default class ResModal extends Component {
   }
 
   render() {
-    const { open, plates, stall, time, hours } = this.state
+    const { open, stall, time, hours } = this.state
     return (
       <MuiThemeProvider theme={theme}>
         <Modal
@@ -77,19 +78,23 @@ export default class ResModal extends Component {
             <Typography variant='h6' id='modal-title'>
               Make a reservation
             </Typography>
-            <TextField
-              id='outlined-input-plates'
-              label='Car Plates'
-              type='text'
-              name='plates'
-              value={plates}
-              onChange={this.handleChange}
-              margin='normal'
-              variant='outlined'
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
+            <CredContextConsumer>{context => (
+              <TextField
+                id='outlined-input-plates'
+                label='Car Plates'
+                type='text'
+                name='plates'
+                value={context.plates}
+                onChange={this.handleChange}
+                margin='normal'
+                variant='outlined'
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            )}
+            </CredContextConsumer>
+            
             <TextField
               id='outlined-select-stall'
               select
