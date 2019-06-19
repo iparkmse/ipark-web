@@ -12,6 +12,7 @@ import NavItem from '../src/components/navigation/NavItem'
 import ParkingStatus from '../src/components/parkingInfo/ParkingStatus'
 import ResCalendar from '../src/components/reservation/ResCalendar'
 import ResMain from '../src/components/reservation/ResMain'
+import ResRef from '../src/components/reservation/ResRef'
 
 
 let buttonStyle = {
@@ -67,4 +68,7 @@ storiesOf('React Component', module)
   ))
   .add('Reservation main page', () => (
     <ResMain />
+  ))
+  .add('Reservation reference page', () => (
+    <ResRef />
   ))
