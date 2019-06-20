@@ -44,6 +44,7 @@ export default class ResCell extends Component {
     stall: '',
     time: '',
     hours: '1',
+    myUid: ''
   }
 
   handleClick = e => {
@@ -64,7 +65,10 @@ export default class ResCell extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { plates } = this.context
+    const { myUid, plates } = this.context
+    if (myUid && !prevState.myUid) {
+      this.setState({ myUid: myUid })
+    }
     if (plates && !prevState.plates) {
       this.setState({ plates: plates })
     }

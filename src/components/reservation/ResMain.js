@@ -7,6 +7,7 @@ import ResTable from './ResTable'
 import RES_DATA from './res_data'
 import LoginReminder from '../userAuth/LoginReminder'
 import Spinner from '../util/Spinner'
+import { DateContextProvider } from '../../contexts/DateContext'
 import firebaseApp from '../../firebase'
 
 const db = firebaseApp.database()
@@ -77,7 +78,9 @@ export default class ResMain extends Component {
     return (login ? (
       <Wrapper>
         <ResCalendar resMainHandler={this.updateRes}/>
-        <ResTable date={date} resData={resData}/>
+        <DateContextProvider value={date}>
+          <ResTable date={date} resData={resData}/>
+        </DateContextProvider>
       </Wrapper>
     ) : (
       <LoginReminder />

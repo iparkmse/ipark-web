@@ -10,7 +10,9 @@ import RadioGroup from '@material-ui/core/RadioGroup'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
-import { stalls, times } from './ResTable'
+import { stalls, times, timesDB } from './ResTable'
+import { DateContext } from '../../contexts/DateContext'
+import firebaseApp from '../../firebase'
 
 
 const modalStyle = {
@@ -36,7 +38,10 @@ const theme = createMuiTheme({
   }
 })
 
+const db = firebaseApp.database()
+
 export default class ResModal extends Component {
+  static contextType = DateContext
   state = {...this.props}
 
   handleOpen = () => {
@@ -52,14 +57,31 @@ export default class ResModal extends Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
+  handleSubmit = e => {
+    e.preventDefault()
+    const date = this.context
+    const index = times.indexOf(this.state.time)
+    const time = timesDB[index]
+    db.ref(`reservation/${date}/stall${this.state.stall}/${time}`).update({
+      plates: this.state.plates,
+      uid: this.state.myUid
+    })
+    this.handleClose()
+  }
+
   componentDidUpdate(oldProps) {
     const newProps = this.props
+    if (oldProps.plates !== newProps.plates) {
+      this.setState({ plates: newProps.plates })
+    }
+    if (oldProps.myUid !== newProps.myUid) {
+      this.setState({ myUid: newProps.myUid })
+    }
     if (oldProps.open !== newProps.open) {
       this.setState({
         open: newProps.open,
         time: newProps.time,
         stall: newProps.stall,
-        plates: newProps.plates
       })
     }
   }
@@ -146,7 +168,7 @@ export default class ResModal extends Component {
               </RadioGroup>
             </FormControl>
             <br />
-            <Button color='primary' type='submit' style={{margin: '30px 10px 0 0'}}>RESERVE</Button>
+            <Button color='primary' type='submit' style={{margin: '30px 10px 0 0'}} onClick={this.handleSubmit}>RESERVE</Button>
             <Button style={{marginTop: 30}} onClick={this.handleClose}>CANCEL</Button>
           </form>
         </Modal>
