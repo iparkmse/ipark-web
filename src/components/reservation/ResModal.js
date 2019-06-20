@@ -57,16 +57,45 @@ export default class ResModal extends Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
-  handleSubmit = e => {
-    e.preventDefault()
+  verifyReq = async () => {
     const date = this.context
     const index = times.indexOf(this.state.time)
-    const time = timesDB[index]
-    db.ref(`reservation/${date}/stall${this.state.stall}/${time}`).update({
-      plates: this.state.plates,
-      uid: this.state.myUid
-    })
-    this.handleClose()
+    const cond1 = index + Number(this.state.hours) <= times.length
+    let i = 0
+    let cond2 = true && cond1
+    while (i < this.state.hours && cond2) {
+      const time = timesDB[index + i]
+      const snapshot = await db.ref(`reservation/${date}/stall${this.state.stall}/${time}`).once('value')
+      cond2 = snapshot.val().uid === ''
+      i++
+    }
+    return cond2
+  }
+
+  handleSubmit = async (e) => {
+    e.preventDefault()
+    const isValid = await this.verifyReq()
+
+    if (isValid) {
+      const { stall, plates, myUid } = this.state
+      const date = this.context
+      const index = times.indexOf(this.state.time)
+      let i = 0
+      this.handleClose()
+
+      while (i < this.state.hours) {
+        const time = timesDB[index + i]
+        db.ref(`reservation/${date}/stall${stall}/${time}`).update({
+          plates: plates,
+          uid: myUid
+        })
+        i++
+      }
+    }
+
+    else {
+      console.log('request invalid')
+    }
   }
 
   componentDidUpdate(oldProps) {
