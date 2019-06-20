@@ -39,7 +39,7 @@ export default class Navbar extends Component {
         login: isLogin,
         myUid: uid
       })
-      if (uid) {
+      if (uid && !this.state.plates) {
         db.ref(`users/${uid}`).once('value')
           .then(snapshot => {
             this.setState({ plates: snapshot.val().licensePlate })

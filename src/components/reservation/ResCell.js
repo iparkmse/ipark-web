@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import ResModal from './ResModal'
 import { stalls, times } from './ResTable'
-import { CredContextConsumer } from '../../contexts/CredContext'
+import { CredContext } from '../../contexts/CredContext'
 
 const MyCell = styled.div`
   background-color: moccasin;
@@ -36,8 +36,11 @@ const FreeCell = styled.div`
 `
 
 export default class ResCell extends Component {
+  static contextType = CredContext
+
   state = {
     open: false,
+    plates: '',
     stall: '',
     time: '',
     hours: '1',
@@ -51,7 +54,7 @@ export default class ResCell extends Component {
       this.setState({
         open: true,
         stall: stall,
-        time: time
+        time: time,
       })
     }
   }
@@ -60,28 +63,31 @@ export default class ResCell extends Component {
     this.setState({ open: false })
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    const { plates } = this.context
+    if (plates && !prevState.plates) {
+      this.setState({ plates: plates })
+    }
+  }
+
   render() {
     const { uid, index } = this.props
+    const { myUid } = this.context
 
-    return (
-      <CredContextConsumer>{context => {
-        if (!uid) return (
-          <FreeCell data-index={index} onClick={this.handleClick}>
-            <ResModal closeHandler={this.handleClose} {...this.state } />
-          </FreeCell>
-        )
-        return (uid === context.myUid ? (
-          <MyCell>
-            [my booking]
-          </MyCell>
-        ) : (
-          <BookedCell data-index={index}>
-            [booked]
-          </BookedCell>
-        ))
-      }}
-      </CredContextConsumer>
+    if (!uid) return (
+      <FreeCell data-index={index} onClick={this.handleClick}>
+        <ResModal closeHandler={this.handleClose} {...this.state } />
+      </FreeCell>
     )
+    return (uid === myUid ? (
+      <MyCell>
+        [my booking]
+      </MyCell>
+    ) : (
+      <BookedCell data-index={index}>
+        [booked]
+      </BookedCell>
+    ))
   }
 }
 
