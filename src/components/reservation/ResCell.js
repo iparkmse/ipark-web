@@ -77,7 +77,7 @@ export default class ResCell extends Component {
   render() {
     const { uid, index, hasBooked } = this.props
     const { myUid } = this.context
-    
+
     if (hasBooked && !uid) return (
       <FreeCell data-index={index} />
     )
