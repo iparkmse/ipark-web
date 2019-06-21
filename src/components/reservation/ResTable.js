@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import ResCell from './ResCell'
 import Spinner from '../util/Spinner'
+import { CredContext } from '../../contexts/CredContext'
 
 const Wrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.6);  /* Black with Transparency of 40% */
@@ -60,8 +61,30 @@ const TimeCol = () => times.map(time => {
 })
 
 export default class ResTable extends Component {
+  static contextType = CredContext
+  state = {
+    hasBooked: null
+  }
+  componentDidUpdate(oldProps) {
+    const newProps = this.props
+    const { resData } = newProps
+    const { myUid } = this.context
+    if (oldProps.resData !== resData && myUid) {
+      const resStalls = Object.keys(resData)
+      const resInfo = resStalls.map(stall => Object.values(resData[stall]))
+      let found = false
+      for (let i = 0; i < resInfo.length && !found; i++) {
+        for (let j = 0; j < resInfo[i].length && !found; j++) {
+          if (resInfo[i][j].uid === myUid) found = true
+        }
+      }
+      if (found) this.setState({ hasBooked: true })
+      else this.setState({ hasBooked: false })
+    }
+  }
   render() {
     const { date, resData } = this.props
+    const { hasBooked } = this.state
     if (resData) {
       const resStalls = Object.keys(resData)
       const resInfo = resStalls.map(stall => Object.values(resData[stall]))
@@ -73,7 +96,7 @@ export default class ResTable extends Component {
             {resInfo.map(stalls => stalls.map(stall => {
               return (
                 <Fragment key={stall.index}>
-                  <ResCell uid={stall.uid} index={stall.index} />
+                  <ResCell uid={stall.uid} index={stall.index} hasBooked={hasBooked} />
                 </Fragment>
               )
             }))}
