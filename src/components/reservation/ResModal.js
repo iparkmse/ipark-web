@@ -42,14 +42,17 @@ const db = firebaseApp.database()
 
 export default class ResModal extends Component {
   static contextType = DateContext
-  state = {...this.props}
+  state = {
+    ...this.props,
+    error: false
+  }
 
   handleOpen = () => {
     this.setState({ open: true })
   }
 
   handleClose = () => {
-    this.setState({ open: false })
+    this.setState({ open: false, error: false })
     this.props.closeHandler()
   }
 
@@ -94,7 +97,7 @@ export default class ResModal extends Component {
     }
 
     else {
-      console.log('request invalid')
+      this.setState({ error: true })
     }
   }
 
@@ -116,7 +119,7 @@ export default class ResModal extends Component {
   }
 
   render() {
-    const { open, plates, stall, time, hours } = this.state
+    const { open, plates, stall, time, hours, error } = this.state
     return (
       <MuiThemeProvider theme={theme}>
         <Modal
@@ -199,6 +202,16 @@ export default class ResModal extends Component {
             <br />
             <Button color='primary' type='submit' style={{margin: '30px 10px 0 0'}} onClick={this.handleSubmit}>RESERVE</Button>
             <Button style={{marginTop: 30}} onClick={this.handleClose}>CANCEL</Button>
+            {error && (
+              <Typography 
+                variant='caption'
+                color='error'
+              >
+                Request invalid! The reservation conflicts with other bookings.
+                <br />
+                Please consider changing: 1) stall 2) time 3) hours
+              </Typography>
+            )}
           </form>
         </Modal>
       </MuiThemeProvider>
