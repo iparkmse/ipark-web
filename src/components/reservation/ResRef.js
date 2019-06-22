@@ -23,12 +23,15 @@ const modalStyle = {
 const headerStyle = {
   margin: '0px 0px 20px 0px',
   color: 'Green',
+  fontWeight: 'bold',
+  fontSize: '25px'
 }
 
 const bottonStyle = {
   margin: '20px 0px 0px 0px',
   color: 'Green',
-  fontSize: '18px'
+  fontSize: '18px',
+  fontWeight: 'bold'
 }
 
 const bodyStyle = {
@@ -82,7 +85,7 @@ class ResRef extends Component {
                 readOnly: true,
               }}
               inputProps = {{
-                style: { textAlign: 'center', letterSpacing: '10px', width: '200px', fontSize: '30px', color: 'DarkSlateGray'}
+                style: { textAlign: 'center', letterSpacing: '10px', width: '200px', fontSize: '30px', color: 'DarkSlateGray', fontWeight: 'bold'}
               }}
               InputLabelProps = {{
                 style: { color: 'LimeGreen'}
