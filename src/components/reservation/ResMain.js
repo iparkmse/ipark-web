@@ -20,12 +20,14 @@ const Wrapper = styled.div`
 export default class ResMain extends Component {
   updateRes = (ResCalendarData, index) => {
     this.setState({
+      index: index,
       date: ResCalendarData,
-      resData: this.state.dbData[index]
+      resData: {...this.state.dbData[index]}
     })
   }
 
   state = {
+    index: 0,
     date: reformattedDays[0],
     resData: null,
     dbData: new Array(dayLength)  // reservation data for X days on database [ {}, ..., {} ]
@@ -44,8 +46,8 @@ export default class ResMain extends Component {
           else tempDbData[i] = snapshot.val()
           if (i === dayLength - 1) {
             this.setState({
-              resData: tempDbData[0],
-              dbData: tempDbData
+              resData: {...tempDbData[0]},
+              dbData: [...tempDbData]
             })
           }
         })
@@ -55,15 +57,22 @@ export default class ResMain extends Component {
       const reservationRef = db.ref(`reservation/${day}`)
       reservationRef.on('child_changed', childSnapshot => {
         const stallName = childSnapshot.key  // i.e. stallA1
-        const copy = this.state.dbData
+        const copy = [...this.state.dbData]
         copy[i][stallName] = childSnapshot.val()
-        this.setState({ dbData: copy })
+        this.setState({ dbData: [...copy] })
+        if (i === this.state.index) {
+          this.setState({ resData: {...copy[i]} })
+        }
       })
     })
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  // }
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.resData !== prevState.resData) {
+      console.log('previous:', prevState.resData)
+      console.log('now:', this.state.resData)
+    }
+  }
 
   componentWillUnmount() {
     reformattedDays.forEach(day => {
