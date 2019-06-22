@@ -66,7 +66,7 @@ export default class ResTable extends Component {
   state = {
     hasBooked: null
   }
-  
+
   componentDidUpdate(oldProps) {
     const newProps = this.props
     const { resData } = newProps
