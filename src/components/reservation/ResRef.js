@@ -1,6 +1,4 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
-import styled from 'styled-components'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
@@ -29,16 +27,13 @@ const headerStyle = {
 
 const bottonStyle = {
   margin: '20px 0px 0px 0px',
-  color: 'Green'
+  color: 'Green',
+  fontSize: '18px'
 }
 
 const bodyStyle = {
   margin: '10px 0px 0px 0px',
   color: 'DarkSlateGray'
-}
-
-const bookRefStyle = {
-  letterSpacing: '10px'
 }
 
 const theme = createMuiTheme({
