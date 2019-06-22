@@ -203,10 +203,7 @@ export default class ResModal extends Component {
             <Button color='primary' type='submit' style={{margin: '30px 10px 0 0'}} onClick={this.handleSubmit}>RESERVE</Button>
             <Button style={{marginTop: 30}} onClick={this.handleClose}>CANCEL</Button>
             {error && (
-              <Typography 
-                variant='caption'
-                color='error'
-              >
+              <Typography variant='caption' color='error'>
                 Request invalid! The reservation conflicts with other bookings.
                 <br />
                 Please consider changing: 1) stall 2) time 3) hours
