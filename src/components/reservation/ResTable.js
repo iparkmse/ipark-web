@@ -69,7 +69,7 @@ export default class ResTable extends Component {
     const newProps = this.props
     const { resData } = newProps
     const { myUid } = this.context
-    if (oldProps.resData !== resData && myUid) {
+    if (oldProps !== this.props && myUid) {
       const resStalls = Object.keys(resData)
       const resInfo = resStalls.map(stall => Object.values(resData[stall]))
       let found = false

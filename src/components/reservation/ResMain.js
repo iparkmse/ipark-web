@@ -50,19 +50,20 @@ export default class ResMain extends Component {
           }
         })
     })
-  }
 
-  componentDidUpdate() {
-    let copy = this.state.dbData  // ds: [ {}, ..., {} ]
     reformattedDays.forEach((day, i) => {
       const reservationRef = db.ref(`reservation/${day}`)
       reservationRef.on('child_changed', childSnapshot => {
         const stallName = childSnapshot.key  // i.e. stallA1
+        const copy = this.state.dbData
         copy[i][stallName] = childSnapshot.val()
         this.setState({ dbData: copy })
       })
     })
   }
+
+  // componentDidUpdate(prevProps, prevState) {
+  // }
 
   componentWillUnmount() {
     reformattedDays.forEach(day => {
@@ -77,9 +78,9 @@ export default class ResMain extends Component {
     if (login === null) return (<Spinner />)
     return (login ? (
       <Wrapper>
-        <ResCalendar resMainHandler={this.updateRes}/>
+        <ResCalendar resMainHandler={this.updateRes} />
         <DateContextProvider value={date}>
-          <ResTable date={date} resData={resData}/>
+          <ResTable date={date} resData={resData} />
         </DateContextProvider>
       </Wrapper>
     ) : (
