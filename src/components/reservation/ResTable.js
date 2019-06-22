@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { isEqual } from 'underscore'
 import ResCell from './ResCell'
 import Spinner from '../util/Spinner'
 import { CredContext } from '../../contexts/CredContext'
@@ -65,11 +66,12 @@ export default class ResTable extends Component {
   state = {
     hasBooked: null
   }
+  
   componentDidUpdate(oldProps) {
     const newProps = this.props
     const { resData } = newProps
     const { myUid } = this.context
-    if (oldProps !== this.props && myUid) {
+    if (!isEqual(this.props.resData, oldProps.resData)) {
       const resStalls = Object.keys(resData)
       const resInfo = resStalls.map(stall => Object.values(resData[stall]))
       let found = false
@@ -82,6 +84,7 @@ export default class ResTable extends Component {
       else this.setState({ hasBooked: false })
     }
   }
+
   render() {
     const { date, resData } = this.props
     const { hasBooked } = this.state

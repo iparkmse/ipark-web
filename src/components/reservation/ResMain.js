@@ -67,13 +67,6 @@ export default class ResMain extends Component {
     })
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.resData !== prevState.resData) {
-      console.log('previous:', prevState.resData)
-      console.log('now:', this.state.resData)
-    }
-  }
-
   componentWillUnmount() {
     reformattedDays.forEach(day => {
       db.ref(`reservation/${day}`).off()
