@@ -36,7 +36,8 @@ const bottonStyle = {
 
 const bodyStyle = {
   margin: '10px 0px 0px 0px',
-  color: 'DarkSlateGray'
+  color: 'Red',
+  fontSize: '12px'
 }
 
 const theme = createMuiTheme({
@@ -48,50 +49,84 @@ const theme = createMuiTheme({
   }
 })
 
+const BookRef = '0930'
+
 class ResVal extends Component {
   state = {
-    open: false
+    open: false,
+    error: false,
+    input: ''
   }
 
   handleOpen = () => {
     this.setState({open: true})
   }
+
+  handleClick = () => {
+    // this.setState({open: false})
+    const { input} = this.state
+    this.setState({error: (input != BookRef)}, () => {
+      if (!this.state.error){
+        this.setState({open: false})
+        this.setState({input: ''})
+      }
+    })
+  }
+
   handleClose = () => {
     this.setState({open: false})
+    this.setState({input: ''})
+    this.setState({error: false})
+  }
+
+  handleChange = (e) => {
+    this.setState({ input: e.target.value })
   }
 
   render(){
-    // const BookRef = '0930'
+
+    const { open, error, input } = this.state
     return(
       <MuiThemeProvider theme={theme}>
         <Typography gutterBottom>Placeholder for booking validation button</Typography>
         <Button onClick={this.handleOpen}>Booking Validation</Button>
         <Modal
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-          open={this.state.open}
+          aria-labelledby='reservation-validation-modal'
+          open={open}
           onClose={this.handleClose}
         >
           <div style={modalStyle}>
-            <Typography variant="h6" id="modal-title" style = {headerStyle}>
+            <Typography variant='h6' style={headerStyle}>
               BOOKING VALIDATION
             </Typography>
             <TextField
-              label = 'Booking Reference'
-              InputProps = {{
+              label='Booking Reference'
+              autoFocus
+              error={error}
+              InputProps={{
                 style: { fontSize: '22px'}
               }}
-              inputProps = {{
-                style: { textAlign: 'center', letterSpacing: '10px'}
+              inputProps={{
+                style: { textAlign: 'center', letterSpacing: '10px'},
+                maxLength: 4
               }}
               variant='outlined'
+              value={input}
+              onChange={this.handleChange}
             />
-            <Typography variant="body2" id="modal-title" style = {bodyStyle}>
-              Please keep this reference number for booking validation
-            </Typography>
+            {error && (
+              <Typography variant="body2" style={bodyStyle}>
+                The booking reference does not match our record
+                <br/>
+                Please re-enter the correct booking reference
+              </Typography>
+            )}
             <br/>
-            <Button style = {bottonStyle} onClick={this.handleClose}>
+            <Button style={bottonStyle} onClick={this.handleClick}>
               VALIDATE
+            </Button>
+            <Button style={bottonStyle} onClick={this.handleClose}>
+              CANCEL
             </Button>
           </div>
         </Modal>
