@@ -138,7 +138,7 @@ class LoginForm extends Component {
             <br/>
             <Button type='submit'>LOGIN</Button>
             <br/>
-            <LabelSmall><Link to='/forgot-password' style={LinkStyle}>Forgot Password?</Link></LabelSmall> {/* TODO: create reset-pass component */}
+            <LabelSmall><Link to='/forgot-password' style={LinkStyle}>Forgot Password?</Link></LabelSmall>
             <br/>
           </Form>
         </div>
