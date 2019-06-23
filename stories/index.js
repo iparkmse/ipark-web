@@ -7,6 +7,7 @@ import BackupIcon from '@material-ui/icons/Backup'
 
 import LoginForm from '../src/components/userAuth/LoginForm'
 import SignupForm from '../src/components/userAuth/SignupForm'
+import ForgotPass from '../src/components/userAuth/ForgotPass'
 import Navbar from '../src/components/navigation/Navbar'
 import NavItem from '../src/components/navigation/NavItem'
 import ParkingStatus from '../src/components/parkingInfo/ParkingStatus'
@@ -52,6 +53,9 @@ storiesOf('React Component', module)
   ))
   .add('Signup form V1', () => (
     <SignupForm />
+  ))
+  .add('Forgot Password V1', () => (
+    <ForgotPass />
   ))
   .add('Parking Status Table', () => (
     <ParkingStatus />
