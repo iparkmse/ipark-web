@@ -63,7 +63,6 @@ class ResRef extends Component {
   render(){
     let RefNum = '0930'
     return(
-      //<MuiThemeProvider theme={theme}> </MuiThemeProvider>
       <MuiThemeProvider theme={theme}>
         <Typography gutterBottom>Placeholder for reserve button</Typography>
         <Button onClick={this.handleOpen}>Reserve</Button>

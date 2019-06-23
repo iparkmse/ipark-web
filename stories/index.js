@@ -13,6 +13,7 @@ import ParkingStatus from '../src/components/parkingInfo/ParkingStatus'
 import ResCalendar from '../src/components/reservation/ResCalendar'
 import ResMain from '../src/components/reservation/ResMain'
 import ResRef from '../src/components/reservation/ResRef'
+import ResVal from '../src/components/reservation/ResVal'
 
 
 let buttonStyle = {
@@ -71,4 +72,7 @@ storiesOf('React Component', module)
   ))
   .add('Reservation reference page', () => (
     <ResRef />
+  ))
+  .add('Reservation validation page', () => (
+    <ResVal />
   ))
