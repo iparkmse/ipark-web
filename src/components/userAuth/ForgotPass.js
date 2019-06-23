@@ -65,7 +65,6 @@ export default class ForgotPass extends Component {
     if (rgEmail.test(email)) {
       auth.sendPasswordResetEmail(email)
         .then(() => {
-          console.log('reset request sent')
           this.setState({
             email: '',
             error: false,
