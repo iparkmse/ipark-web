@@ -22,21 +22,27 @@ const modalStyle = {
 
 const headerStyle = {
   margin: '0px 0px 20px 0px',
-  // color: 'Green',
   fontWeight: 'bold',
   fontSize: '25px'
 }
 
-const bottonStyle = {
+const bottonStyleVal = {
   margin: '20px 0px 0px 0px',
-  // color: 'Green',
+  color: 'green',
+  fontSize: '18px',
+  fontWeight: 'bold'
+}
+
+const bottonStyleCan = {
+  margin: '20px 0px 0px 0px',
+  color: 'grey',
   fontSize: '18px',
   fontWeight: 'bold'
 }
 
 const bodyStyle = {
   margin: '10px 0px 0px 0px',
-  color: 'Red',
+  color: 'red',
   fontSize: '12px'
 }
 
@@ -122,10 +128,10 @@ class ResVal extends Component {
               </Typography>
             )}
             <br/>
-            <Button style={bottonStyle} onClick={this.handleClick}>
+            <Button style={bottonStyleVal} onClick={this.handleClick}>
               VALIDATE
             </Button>
-            <Button style={bottonStyle} onClick={this.handleClose}>
+            <Button style={bottonStyleCan} onClick={this.handleClose}>
               CANCEL
             </Button>
           </div>
