@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Link, Redirect } from 'react-router-dom'
@@ -78,54 +78,64 @@ const LabelSmall = styled.label`
   margin: 0 0 10px 0;
 `
 
+export const ErrMsg = styled.div`
+  color: orangered;
+  padding: 0 10px;
+  margin: 0 10px;
+`
+
 const auth = firebaseApp.auth()
 
 class LoginForm extends Component {
     state = {
-      email: null,
-      password: null
+      email: '',
+      password: '',
+      error: false,
     }
 
-    handleSubmit = (e) => {
+    handleSubmit = e => {
       e.preventDefault()
-      const email = this.state.email
-      const password = this.state.password
+      const { email, password } = this.state
       auth.signInWithEmailAndPassword(email, password)
-        .then(UserCredential => {
-          console.log('cred valid! Login as', UserCredential.user.email)
-        })
         .catch(err => {
-          console.log(err.message)
+          this.setState({ error: true, password: '' })
         })
-      console.log('Form Submitted \nEmail Adress:', this.state.email, '\nPassword:', this.state.password)
     }
 
-    handleChange = (e) => {
+    handleChange = e => {
       this.setState({ [e.target.name]: e.target.value })
+      if (this.state.email.length > 0) {
+        this.setState({ error: false })
+      }
     }
 
     handleCheckbox = () => {
-      console.log('Remember User', this.state.email)
+      // TODO: implement this feature
+    }
+
+    componentDidMount() {
+      this.setState({ error: false, disabled: false })
     }
 
     render(){
       const { login } = this.props
+      const { password, error } = this.state
       if (login === null) return (<Spinner />)
 
       return (login ? (
         <Redirect to ='/' />
       ) : (
-        <div>
+        <Fragment>
           <Form className='LoginForm' onSubmit={this.handleSubmit}>
             <Title>WELCOME TO IPARK</Title>
             <br/>
             <Label>EMAIL ADDRESS</Label>
             <br/>
-            <Input type='email' name='email' onChange={this.handleChange} />
+            <Input type='email' name='email' error={error} onChange={this.handleChange} />
             <br/>
             <Label>PASSWORD</Label>
             <br/>
-            <Input type='password' name='password' onChange={this.handleChange} />
+            <Input type='password' name='password' error={error} value={password} onChange={this.handleChange} />
             <br/>
             <FormControlLabel
               control = {
@@ -133,15 +143,18 @@ class LoginForm extends Component {
                   color="default"
                 />
               }
-              label = 'Remember Me'
+              label='Remember Me'
             />
             <br/>
             <Button type='submit'>LOGIN</Button>
             <br/>
             <LabelSmall><Link to='/forgot-password' style={LinkStyle}>Forgot Password?</Link></LabelSmall>
             <br/>
+            {error && (
+              <ErrMsg>The email or password you entered is incorrect</ErrMsg>
+            )}
           </Form>
-        </div>
+        </Fragment>
       ))
     }
 }

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { Button, Form, Input, Title } from './LoginForm'
+import { Button, ErrMsg, Form, Input, Title } from './LoginForm'
 import firebaseApp from '../../firebase'
 
 
@@ -13,12 +13,6 @@ const AlignWrapper = styled.div`
 const Text = styled.span`
   color: white;
   padding: 25px;
-`
-
-const ErrMsg = styled.div`
-  color: orangered;
-  padding: 0 10px;
-  margin: 0 10px;
 `
 
 const LinkStyle = {
@@ -53,7 +47,7 @@ export default class ForgotPass extends Component {
   }
 
   handleChange = e => {
-    if (this.state.email === '') {
+    if (e.target.value === '') {
       this.setState({ error: false, success: false })
     }
     this.setState({ [e.target.name]: e.target.value })
