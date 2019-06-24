@@ -2,6 +2,7 @@ import React, {Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import ResModal from './ResModal'
+import ForbidModal from './ForbidModal'
 import { stalls, times } from './ResTable'
 import { CredContext } from '../../contexts/CredContext'
 
@@ -79,7 +80,9 @@ export default class ResCell extends Component {
     const { myUid } = this.context
 
     if (hasBooked && !uid) return (
-      <FreeCell data-index={index} />
+      <FreeCell data-index={index} onClick={this.handleClick}>
+        <ForbidModal closeHandler={this.handleClose} open={this.state.open}/>
+      </FreeCell>
     )
     else if (!uid) return (
       <FreeCell data-index={index} onClick={this.handleClick}>

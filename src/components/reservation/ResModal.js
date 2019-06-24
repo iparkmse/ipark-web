@@ -47,10 +47,6 @@ export default class ResModal extends Component {
     error: false
   }
 
-  handleOpen = () => {
-    this.setState({ open: true })
-  }
-
   handleClose = () => {
     this.setState({ open: false, error: false })
     this.props.closeHandler()
@@ -129,7 +125,7 @@ export default class ResModal extends Component {
           onClose={this.handleClose}
         >
           <form style={modalStyle}>
-            <Typography variant='h6' id='modal-title'>
+            <Typography variant='h6' id='composer-modal-title'>
               Make a reservation
             </Typography>
             <TextField
