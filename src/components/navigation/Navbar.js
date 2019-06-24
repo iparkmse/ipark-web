@@ -6,6 +6,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 import NavContent from './NavContent'
 import NavHome from './NavHome'
 import LoginForm from '../userAuth/LoginForm'
+import ForgotPass from '../userAuth/ForgotPass'
 import SignupForm from '../userAuth/SignupForm'
 import ResMain from '../reservation/ResMain'
 import Spinner from '../util/Spinner'
@@ -69,6 +70,7 @@ export default class Navbar extends Component {
           </AppBar>
           <Route exact path='/' render={() => <NavHome login={login} />} />
           <Route path='/login' render={() => <LoginForm login={login} />} />
+          <Route path='/forgot-password' render={() => <ForgotPass />} />
           <Route path='/signup' render={() => <SignupForm login={login} />} />
           <Route path='/reservation' render={() => <ResMain login={login} />} />
         </CredContextProvider>
