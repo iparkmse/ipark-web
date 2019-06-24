@@ -1,4 +1,4 @@
-import React, { Component, Fragment }  from 'react'
+import React, { Component }  from 'react'
 import styled from 'styled-components'
 import { BrowserRouter, Route } from 'react-router-dom'
 import AppBar from '@material-ui/core/AppBar'
@@ -7,7 +7,9 @@ import NavContent from './NavContent'
 import NavHome from './NavHome'
 import LoginForm from '../userAuth/LoginForm'
 import SignupForm from '../userAuth/SignupForm'
+import ResMain from '../reservation/ResMain'
 import Spinner from '../util/Spinner'
+import { CredContextProvider } from '../../contexts/CredContext'
 import firebaseApp from '../../firebase'
 
 const ImgWrapper = styled.span`
@@ -20,16 +22,29 @@ const BarStyle = {
 
 let unsubscribeAuth
 const auth = firebaseApp.auth()
+const db = firebaseApp.database()
 
 export default class Navbar extends Component {
   state = {
-    login: null
+    login: null,
+    myUid: null,
+    plates: null
   }
 
   componentDidMount() {
     unsubscribeAuth = auth.onAuthStateChanged(user => {
       const isLogin = user ? true : false
-      this.setState({ login: isLogin })
+      const uid = user? user.uid : null
+      this.setState({
+        login: isLogin,
+        myUid: uid
+      })
+      if (uid && !this.state.plates) {
+        db.ref(`users/${uid}`).once('value')
+          .then(snapshot => {
+            this.setState({ plates: snapshot.val().licensePlate })
+          })
+      }
     })
   }
 
@@ -43,7 +58,7 @@ export default class Navbar extends Component {
     if (login === null) return (<Spinner />)
     return (
       <BrowserRouter>
-        <Fragment>
+        <CredContextProvider value={{...this.state}}>
           <AppBar position="fixed" style={BarStyle}>
             <Toolbar>
               <ImgWrapper>
@@ -55,7 +70,8 @@ export default class Navbar extends Component {
           <Route exact path='/' render={() => <NavHome login={login} />} />
           <Route path='/login' render={() => <LoginForm login={login} />} />
           <Route path='/signup' render={() => <SignupForm login={login} />} />
-        </Fragment>
+          <Route path='/reservation' render={() => <ResMain login={login} />} />
+        </CredContextProvider>
       </BrowserRouter>
     )
   }
