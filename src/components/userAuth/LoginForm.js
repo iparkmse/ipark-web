@@ -97,7 +97,7 @@ class LoginForm extends Component {
       e.preventDefault()
       const { email, password } = this.state
       auth.signInWithEmailAndPassword(email, password)
-        .catch(err => {
+        .catch(() => {
           this.setState({ error: true, password: '' })
         })
     }
