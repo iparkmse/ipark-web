@@ -6,7 +6,7 @@ import SignupSuccess from './SignupSuccess'
 import Spinner from '../util/Spinner'
 import firebaseApp from '../../firebase'
 
-const GridWrapper = styled.div`
+const InputGrid = styled.div`
   display: grid;
   grid-template-columns: 400px;
   grid-template-rows: 40px 40px 40px 40px 40px;
@@ -22,6 +22,16 @@ const NameGrid = styled.div`
   column-gap: 10px;
 `
 
+const ErrorGrid = styled.div`
+  display: grid;
+  grid-template-columns: 430px;
+  line-height: 20px;
+  justify-content: center;
+  text-align: left;
+  color: orangered;
+  font-weight: 700;
+`
+
 const validate = (email, pass, confirmPass, fName, lName, licensePlate) => {
   const rgEmail = /\S+@\S+\.\S+/
   const rgName = /^[a-z ,.'-]+$/i
@@ -33,6 +43,15 @@ const validate = (email, pass, confirmPass, fName, lName, licensePlate) => {
     lName: !rgName.test(lName),
     licensePlate: licensePlate.length < 4
   }
+}
+
+const ErrMsg = {
+  fName: 'First name can\'t be empty',
+  lName: 'Last name can\'t be empty',
+  email: 'Email needs to be in the standard format',
+  pass: 'Password must be at least 8 characters',
+  confirmPass: 'Please make sure your passwords match',
+  licensePlate: 'License plate must be at least 4 characters'
 }
 
 const auth = firebaseApp.auth()
@@ -63,7 +82,7 @@ export default class SignupForm extends Component {
     return !isDisabled
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     if (!this.canBeSubmitted()) {
       e.preventDefault()
       console.log('some fields are invalid')
@@ -82,7 +101,7 @@ export default class SignupForm extends Component {
     })
   }
 
-  handleChange = (e) => {
+  handleChange = e => {
     this.setState({ [e.target.name]: e.target.value })
   }
 
@@ -104,17 +123,25 @@ export default class SignupForm extends Component {
     ) : (
       <Form onSubmit={this.handleSubmit}>
         <Title>WELCOME TO IPARK</Title>
-        <GridWrapper>
+        <InputGrid>
           <NameGrid>
-            <Input type='text' name='fName' placeholder='first name' onChange={this.handleChange} onBlur={this.handleBlur} error={shouldMarkError('fName')} required />
-            <Input type='text' name='lName' placeholder='last name' onChange={this.handleChange} onBlur={this.handleBlur} error={shouldMarkError('lName')} required />
+            <Input type='text' name='fName' placeholder='first name' onChange={this.handleChange} onBlur={this.handleBlur} error={shouldMarkError('fName')} />
+            <Input type='text' name='lName' placeholder='last name' onChange={this.handleChange} onBlur={this.handleBlur} error={shouldMarkError('lName')} />
           </NameGrid>
-          <Input type='email' name='email' placeholder='email' onChange={this.handleChange} onBlur={this.handleBlur} error={shouldMarkError('email')} required />
-          <Input type='password' name='pass' placeholder='password' onChange={this.handleChange} onBlur={this.handleBlur} error={shouldMarkError('pass')} required />
-          <Input type='password' name='confirmPass' placeholder='confirm password' onChange={this.handleChange} onBlur={this.handleBlur} error={shouldMarkError('confirmPass')} required />
-          <Input type='text' name='licensePlate' placeholder='license plate' onChange={this.handleChange} onBlur={this.handleBlur} error={shouldMarkError('licensePlate')} required />
-        </GridWrapper>
+          <Input type='email' name='email' placeholder='email' onChange={this.handleChange} onBlur={this.handleBlur} error={shouldMarkError('email')} />
+          <Input type='password' name='pass' placeholder='password' onChange={this.handleChange} onBlur={this.handleBlur} error={shouldMarkError('pass')} />
+          <Input type='password' name='confirmPass' placeholder='confirm password' onChange={this.handleChange} onBlur={this.handleBlur} error={shouldMarkError('confirmPass')} />
+          <Input type='text' name='licensePlate' placeholder='license plate' onChange={this.handleChange} onBlur={this.handleBlur} error={shouldMarkError('licensePlate')} />
+        </InputGrid>
         <Button disabled={isDisabled} type='submit'>SIGN UP</Button>
+        <ErrorGrid>
+          <ul>
+            {Object.keys(ErrMsg).map(key => (
+              shouldMarkError(key) ? (
+                <li key={key}>{ErrMsg[key]}</li>
+              ) : null))}
+          </ul>
+        </ErrorGrid>
       </Form>
     ))
   }

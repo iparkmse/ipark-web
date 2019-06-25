@@ -113,10 +113,6 @@ class LoginForm extends Component {
       // TODO: implement this feature
     }
 
-    componentDidMount() {
-      this.setState({ error: false, disabled: false })
-    }
-
     render(){
       const { login } = this.props
       const { password, error } = this.state
