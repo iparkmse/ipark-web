@@ -65,6 +65,7 @@ export default class SignupForm extends Component {
     fName: '',
     lName: '',
     licensePlate: '',
+    signupErr: null,
 
     touched: {
       email: false,
@@ -76,33 +77,28 @@ export default class SignupForm extends Component {
     }
   }
 
-  canBeSubmitted = () => {
-    const errors = validate(this.state.email, this.state.pass, this.state.confirmPass, this.state.fName, this.state.lName, this.state.licensePlate)
-    const isDisabled = Object.keys(errors).some(i => errors[i])
-    return !isDisabled
-  }
-
   handleSubmit = e => {
-    if (!this.canBeSubmitted()) {
-      e.preventDefault()
-      console.log('some fields are invalid')
-      return
-    }
     e.preventDefault()
-    console.log('sign up successfully')
-    auth.createUserWithEmailAndPassword(this.state.email, this.state.pass).then(cred => {
-      db.ref(`users/${cred.user.uid}`).set({
-        uid: cred.user.uid,
-        first_name: this.state.fName,
-        last_name: this.state.lName,
-        email: this.state.email,
-        licensePlate: this.state.licensePlate
+    auth.createUserWithEmailAndPassword(this.state.email, this.state.pass)
+      .then(cred => {
+        db.ref(`users/${cred.user.uid}`).set({
+          uid: cred.user.uid,
+          first_name: this.state.fName,
+          last_name: this.state.lName,
+          email: this.state.email,
+          licensePlate: this.state.licensePlate
+        })
       })
-    })
+      .catch(err => {
+        this.setState({ signupErr: err.message })
+      })
   }
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value })
+    if (e.target.name === 'email' && this.state.signupErr !== null) {
+      this.setState({ signupErr: null })
+    }
   }
 
   handleBlur = e => {
@@ -111,7 +107,7 @@ export default class SignupForm extends Component {
 
   render() {
     const { login } = this.props
-    const { email, pass, confirmPass, fName, lName, licensePlate } = this.state
+    const { email, pass, confirmPass, fName, lName, licensePlate, signupErr } = this.state
     const errors = validate(email, pass, confirmPass, fName, lName, licensePlate)
     const isDisabled = Object.keys(errors).some(i => errors[i])
 
@@ -136,6 +132,7 @@ export default class SignupForm extends Component {
         <Button disabled={isDisabled} type='submit'>SIGN UP</Button>
         <ErrorGrid>
           <ul>
+            {signupErr}
             {Object.keys(ErrMsg).map(key => (
               shouldMarkError(key) ? (
                 <li key={key}>{ErrMsg[key]}</li>
