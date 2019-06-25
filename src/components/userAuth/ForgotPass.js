@@ -42,10 +42,6 @@ export default class ForgotPass extends Component {
     success: false,
   }
 
-  componentDidMount() {
-    this.setState({ error: false, success: false })
-  }
-
   handleChange = e => {
     if (e.target.value === '') {
       this.setState({ error: false, success: false })
