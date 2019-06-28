@@ -17,7 +17,7 @@ const Wrapper = styled.div`
 const GridWrapper = styled.div`
   display: grid;
   grid-template-columns: 221px 418px;
-  grid-template-rows: 310px 113px;
+  grid-template-rows: 243px 180px;
   justify-content: center;
   margin-top: 20px;
 `
