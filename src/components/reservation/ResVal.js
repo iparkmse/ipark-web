@@ -48,7 +48,7 @@ const bodyStyle = {
 
 const theme = createMuiTheme({
   palette: {
-    primary: { main: '#2196F3'}
+    primary: { main: '#2196F3' }
   },
   typography: {
     useNextVariants: true,
@@ -65,24 +65,23 @@ class ResVal extends Component {
   }
 
   handleOpen = () => {
-    this.setState({open: true})
+    this.setState({ open: true })
   }
 
   handleClick = () => {
-    // this.setState({open: false})
-    const { input} = this.state
-    this.setState({error: (input != BookRef)}, () => {
+    const { input } = this.state
+    this.setState({ error: input !== BookRef }, () => {
       if (!this.state.error){
-        this.setState({open: false})
-        this.setState({input: ''})
+        this.setState({ open: false })
+        this.setState({ input: '' })
       }
     })
   }
 
   handleClose = () => {
-    this.setState({open: false})
-    this.setState({input: ''})
-    this.setState({error: false})
+    this.setState({ open: false })
+    this.setState({ input: '' })
+    this.setState({ error: false })
   }
 
   handleChange = (e) => {
@@ -110,10 +109,10 @@ class ResVal extends Component {
               autoFocus
               error={error}
               InputProps={{
-                style: { fontSize: '22px'}
+                style: { fontSize: '22px' }
               }}
               inputProps={{
-                style: { textAlign: 'center', letterSpacing: '10px'},
+                style: { textAlign: 'center', letterSpacing: '10px' },
                 maxLength: 4
               }}
               variant='outlined'
