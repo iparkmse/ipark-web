@@ -22,6 +22,7 @@ import ResCalendar from '../src/components/reservation/ResCalendar'
 import ResMain from '../src/components/reservation/ResMain'
 import ResModal from '../src/components/reservation/ResModal'
 import ResRef from '../src/components/reservation/ResRef'
+import ResVal from '../src/components/reservation/ResVal'
 
 let buttonStyle = {
   backgroundColor: 'green',
@@ -68,3 +69,4 @@ storiesOf('React Component', module)
   .add('Reservation main page', () => <ResMain login={true} />)
   .add('Reservation modal', () => <ResModal open={true} />)
   .add('Reservation reference page', () => <ResRef />)
+  .add('Reservation Validation page', () => <ResVal />)
