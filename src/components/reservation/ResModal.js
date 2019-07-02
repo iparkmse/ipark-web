@@ -15,7 +15,7 @@ import { DateContext } from '../../contexts/DateContext'
 import firebaseApp from '../../firebase'
 
 
-const modalStyle = {
+export const modalStyle = {
   position: 'fixed',
   top: '50%',
   left: '50%',
