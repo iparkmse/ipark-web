@@ -83,10 +83,11 @@ export default class ResCell extends Component {
   render() {
     const { uid, index, hasBooked } = this.props
     const { myUid } = this.context
+    const { open } = this.state
 
     if (hasBooked && !uid) return (
       <FreeCell data-index={index} onClick={this.handleClick}>
-        <ForbidModal closeHandler={this.handleClose} open={this.state.open}/>
+        <ForbidModal closeHandler={this.handleClose} open={open} />
       </FreeCell>
     )
     else if (!uid) return (
@@ -96,7 +97,7 @@ export default class ResCell extends Component {
     )
     return (uid === myUid ? (
       <MyCell data-index={index} onClick={this.handleClick}>
-        <ResRef closeHandler={this.handleClose} open={this.state.open} />
+        <ResRef closeHandler={this.handleClose} open={open} />
         [my booking]
       </MyCell>
     ) : (

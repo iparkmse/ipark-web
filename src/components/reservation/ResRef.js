@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
@@ -39,7 +40,7 @@ class ResRef extends Component {
   state = {
     open: this.props.open
   }
-  
+
   handleClose = () => {
     this.setState({ open: false })
     this.props.closeHandler()
@@ -53,7 +54,7 @@ class ResRef extends Component {
   }
 
   render(){
-    let RefNum = '0930'
+    const reference = '0930'
     return(
       <MuiThemeProvider theme={theme}>
         <Modal
@@ -68,7 +69,7 @@ class ResRef extends Component {
             </Typography>
             <TextField
               label='Booking Reference'
-              defaultValue={RefNum}
+              defaultValue={reference}
               autoFocus
               InputProps={{
                 readOnly: true,
@@ -97,3 +98,8 @@ class ResRef extends Component {
 }
 
 export default ResRef
+
+ResRef.propTypes = {
+  closeHandler: PropTypes.func,
+  open: PropTypes.bool
+}
