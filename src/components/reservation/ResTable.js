@@ -1,13 +1,16 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { isEqual } from 'underscore'
 import ResCell from './ResCell'
 import Spinner from '../util/Spinner'
+import { CredContext } from '../../contexts/CredContext'
 
 const Wrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.6);  /* Black with Transparency of 40% */
   width: 100%;
   margin-top: 20px;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 `
 
 const ResGrid = styled.div`
@@ -44,8 +47,11 @@ const Header = ({ date }) => {
   )
 }
 
-const times = ['7:00', '8:00', '9:00', '10:00', '11:00', '12:00',
+export const stalls = ['A1', 'A2', 'A3']
+export const times = ['7:00', '8:00', '9:00', '10:00', '11:00', '12:00',
   '13:00', '14:00', '15:00', '16:00', '17:00', '18:00']
+export const timesDB = ['a7', 'b8', 'c9', 'd10', 'e11', 'f12',
+  'g13', 'h14', 'i15', 'j16', 'k17', 'l18']
 
 const TimeCol = () => times.map(time => {
   return (
@@ -56,8 +62,32 @@ const TimeCol = () => times.map(time => {
 })
 
 export default class ResTable extends Component {
+  static contextType = CredContext
+  state = {
+    hasBooked: null
+  }
+
+  componentDidUpdate(oldProps) {
+    const newProps = this.props
+    const { resData } = newProps
+    const { myUid } = this.context
+    if (!isEqual(this.props.resData, oldProps.resData)) {
+      const resStalls = Object.keys(resData)
+      const resInfo = resStalls.map(stall => Object.values(resData[stall]))
+      let found = false
+      for (let i = 0; i < resInfo.length && !found; i++) {
+        for (let j = 0; j < resInfo[i].length && !found; j++) {
+          if (resInfo[i][j].uid === myUid) found = true
+        }
+      }
+      if (found) this.setState({ hasBooked: true })
+      else this.setState({ hasBooked: false })
+    }
+  }
+
   render() {
     const { date, resData } = this.props
+    const { hasBooked } = this.state
     if (resData) {
       const resStalls = Object.keys(resData)
       const resInfo = resStalls.map(stall => Object.values(resData[stall]))
@@ -69,7 +99,7 @@ export default class ResTable extends Component {
             {resInfo.map(stalls => stalls.map(stall => {
               return (
                 <Fragment key={stall.index}>
-                  <ResCell uid={stall.uid} />
+                  <ResCell uid={stall.uid} index={stall.index} hasBooked={hasBooked} />
                 </Fragment>
               )
             }))}

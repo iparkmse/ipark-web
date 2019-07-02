@@ -41,7 +41,7 @@ const bodyStyle = {
 
 const theme = createMuiTheme({
   palette: {
-    primary: { main: '#32CD32'}
+    primary: { main: '#32CD32' }
   },
   typography: {
     useNextVariants: true,
@@ -54,10 +54,10 @@ class ResRef extends Component {
   }
 
   handleOpen = () => {
-    this.setState({open: true})
+    this.setState({ open: true })
   }
   handleClose = () => {
-    this.setState({open: false})
+    this.setState({ open: false })
   }
 
   render(){
@@ -73,29 +73,30 @@ class ResRef extends Component {
           onClose={this.handleClose}
         >
           <div style={modalStyle}>
-            <Typography variant="h6" id="modal-title" style = {headerStyle}>
+            <Typography variant="h6" id="modal-title" style={headerStyle}>
               SUCCESS!
             </Typography>
             <TextField
-              label = 'Booking Reference'
-              defaultValue = {RefNum}
+              label='Booking Reference'
+              defaultValue={RefNum}
               autoFocus
-              InputProps = {{
+              InputProps={{
                 readOnly: true,
               }}
-              inputProps = {{
-                style: { textAlign: 'center', letterSpacing: '10px', width: '200px', fontSize: '30px', color: 'DarkSlateGray', fontWeight: 'bold'}
+              inputProps={{
+                style: { textAlign: 'center', letterSpacing: '10px', width: '200px',
+                  fontSize: '30px', color: 'DarkSlateGray', fontWeight: 'bold' }
               }}
-              InputLabelProps = {{
-                style: { color: 'LimeGreen'}
+              InputLabelProps={{
+                style: { color: 'LimeGreen' }
               }}
               variant='outlined'
             />
-            <Typography variant="body2" id="modal-title" style = {bodyStyle}>
+            <Typography variant="body2" id="modal-title" style={bodyStyle}>
               Please keep this reference number for booking validation
             </Typography>
             <br/>
-            <Button style = {bottonStyle} onClick={this.handleClose}>
+            <Button style={bottonStyle} onClick={this.handleClose}>
               OK
             </Button>
           </div>

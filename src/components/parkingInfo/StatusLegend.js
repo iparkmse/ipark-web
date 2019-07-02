@@ -18,6 +18,14 @@ const DotYellow = styled(DotGreen)`
   background-color: gold;
 `
 
+const DotMaroon = styled(DotGreen)`
+  background-color: maroon;
+`
+
+const DotBlack = styled(DotGreen)`
+  background-color: black;
+`
+
 const Table = styled.table`
   border-collapse: collapse;
   font-family: 'Gill Sans', sans-serif;
@@ -42,6 +50,12 @@ const StatusLegend = () => {
           </tr>
           <tr>
             <Cell><DotRed/></Cell><Cell>Occupied</Cell>
+          </tr>
+          <tr>
+            <Cell><DotMaroon/></Cell><Cell>Expiring</Cell>
+          </tr>
+          <tr>
+            <Cell><DotBlack/></Cell><Cell>Violated</Cell>
           </tr>
         </tbody>
       </Table>

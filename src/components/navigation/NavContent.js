@@ -27,6 +27,7 @@ const NavContent = ({ login }) => {
   return (login ? (
     <Fragment>
       <Button component={NavLink} exact to='/' style={BtnStyle} activeStyle={peruEffects}>Parking Status</Button>
+      <Button component={NavLink} exact to='/reservation' style={BtnStyle} activeStyle={peruEffects}>reservation</Button>
       <Button style={BtnStyle} onClick={logout}>Logout</Button>
     </Fragment>
   ) : (

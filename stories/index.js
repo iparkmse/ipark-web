@@ -1,20 +1,28 @@
 import React from 'react'
+import { MemoryRouter } from 'react-router-dom'
 import { storiesOf } from '@storybook/react'
 import { Button } from '@storybook/react/demo'
-import { text, color, object, boolean, number } from '@storybook/addon-knobs'
+import { text, color, object, boolean } from '@storybook/addon-knobs'
 import StarIcon from '@material-ui/icons/Stars'
 import BackupIcon from '@material-ui/icons/Backup'
 
+// userAuth components
 import LoginForm from '../src/components/userAuth/LoginForm'
 import SignupForm from '../src/components/userAuth/SignupForm'
+import LoginReminder from '../src/components/userAuth/LoginReminder'
+
+// navigation components
 import Navbar from '../src/components/navigation/Navbar'
-import NavItem from '../src/components/navigation/NavItem'
+
+// parkingInfo components
 import ParkingStatus from '../src/components/parkingInfo/ParkingStatus'
+
+// reservation components
 import ResCalendar from '../src/components/reservation/ResCalendar'
 import ResMain from '../src/components/reservation/ResMain'
+import ResModal from '../src/components/reservation/ResModal'
 import ResRef from '../src/components/reservation/ResRef'
 import ResVal from '../src/components/reservation/ResVal'
-
 
 let buttonStyle = {
   backgroundColor: 'green',
@@ -41,38 +49,24 @@ storiesOf('Button', module)
     </Button>
   ))
 
-storiesOf('Span', module)
-  .addWithJSX('span with number', () => <span>{number('Age', 78)}</span>)
-
 storiesOf('Material-UI icon', module)
   .addWithJSX('star icon', () => <StarIcon>Outlined</StarIcon>)
   .addWithJSX('backup icon', () => <BackupIcon>Filled</BackupIcon>)
 
 storiesOf('React Component', module)
-  .add('Login form V1', () => (
-    <LoginForm />
+  .addDecorator(story => (
+    <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
   ))
-  .add('Signup form V1', () => (
-    <SignupForm />
-  ))
-  .add('Parking Status Table', () => (
-    <ParkingStatus />
-  ))
-  .add('Navigation bar', () => (
-    <Navbar />
-  ))
-  .add('Navigation item', () => (
-    <NavItem itemTitle='login' itemContent={<LoginForm />} />
-  ))
-  .add('Reservation calendar', () => (
-    <ResCalendar />
-  ))
-  .add('Reservation main page', () => (
-    <ResMain />
-  ))
-  .add('Reservation reference page', () => (
-    <ResRef />
-  ))
-  .add('Reservation validation page', () => (
-    <ResVal />
-  ))
+  .add('Login form V1', () => <LoginForm />)
+  .add('Signup form V1', () => <SignupForm />)
+  .add('Login Reminder', () => <LoginReminder />)
+
+  .add('Parking Status Table', () => <ParkingStatus />)
+
+  .add('Navigation bar', () => <Navbar />)
+
+  .add('Reservation calendar', () => <ResCalendar />)
+  .add('Reservation main page', () => <ResMain login={true} />)
+  .add('Reservation modal', () => <ResModal open={true} />)
+  .add('Reservation reference page', () => <ResRef />)
+  .add('Reservation Validation page', () => <ResVal />)
