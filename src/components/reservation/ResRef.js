@@ -37,23 +37,25 @@ const theme = createMuiTheme({
 
 class ResRef extends Component {
   state = {
-    open: false
-  }
-
-  handleOpen = () => {
-    this.setState({ open: true })
+    open: this.props.open
   }
   
   handleClose = () => {
     this.setState({ open: false })
+    this.props.closeHandler()
+  }
+
+  componentDidUpdate(oldProps) {
+    const newProps = this.props
+    if (oldProps.open !== newProps.open) {
+      this.setState({ open: newProps.open })
+    }
   }
 
   render(){
     let RefNum = '0930'
     return(
       <MuiThemeProvider theme={theme}>
-        <Typography gutterBottom>Placeholder for reserve button</Typography>
-        <Button onClick={this.handleOpen}>Reserve</Button>
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"

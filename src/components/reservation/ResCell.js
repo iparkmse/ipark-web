@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import ResModal from './ResModal'
 import ForbidModal from './ForbidModal'
+import ResRef from './ResRef'
 import { stalls, times } from './ResTable'
 import { CredContext } from '../../contexts/CredContext'
 
@@ -12,6 +13,10 @@ const MyCell = styled.div`
   border-left: none;
   color: palevioletred;
   font-weight: bold;
+
+  :hover {
+    cursor: pointer;
+  }
 `
 
 const BookedCell = styled.div`
@@ -86,11 +91,12 @@ export default class ResCell extends Component {
     )
     else if (!uid) return (
       <FreeCell data-index={index} onClick={this.handleClick}>
-        <ResModal closeHandler={this.handleClose} {...this.state } />
+        <ResModal closeHandler={this.handleClose} {...this.state} />
       </FreeCell>
     )
     return (uid === myUid ? (
-      <MyCell>
+      <MyCell data-index={index} onClick={this.handleClick}>
+        <ResRef closeHandler={this.handleClose} open={this.state.open} />
         [my booking]
       </MyCell>
     ) : (
