@@ -15,7 +15,7 @@ import { DateContext } from '../../contexts/DateContext'
 import firebaseApp from '../../firebase'
 
 
-const modalStyle = {
+export const modalStyle = {
   position: 'fixed',
   top: '50%',
   left: '50%',
@@ -80,13 +80,18 @@ export default class ResModal extends Component {
       const date = this.context
       const index = times.indexOf(this.state.time)
       let i = 0
-      this.handleClose()
+      const reference = (Math.floor(Math.random() * 10000) + 10000).toString().substring(1)
+      this.props.refHandler(reference)
+
+      // close the res composer; remain the open props true so ResRef can display
+      this.setState({ open: false, error: false })
 
       while (i < this.state.hours) {
         const time = timesDB[index + i]
         db.ref(`reservation/${date}/stall${stall}/${time}`).update({
           plates: plates,
-          uid: myUid
+          uid: myUid,
+          bookingRef: reference
         })
         i++
       }
@@ -213,5 +218,6 @@ export default class ResModal extends Component {
 }
 
 ResModal.propTypes = {
-  closeHandler: PropTypes.func
+  closeHandler: PropTypes.func,
+  refHandler: PropTypes.func
 }

@@ -3,8 +3,10 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import ResModal from './ResModal'
 import ForbidModal from './ForbidModal'
+import ResRef from './ResRef'
 import { stalls, times } from './ResTable'
 import { CredContext } from '../../contexts/CredContext'
+import { DateContextConsumer } from '../../contexts/DateContext'
 
 const MyCell = styled.div`
   background-color: moccasin;
@@ -12,6 +14,10 @@ const MyCell = styled.div`
   border-left: none;
   color: palevioletred;
   font-weight: bold;
+
+  :hover {
+    cursor: pointer;
+  }
 `
 
 const BookedCell = styled.div`
@@ -45,7 +51,8 @@ export default class ResCell extends Component {
     stall: '',
     time: '',
     hours: '1',
-    myUid: ''
+    myUid: '',
+    reference: ''
   }
 
   handleClick = e => {
@@ -65,6 +72,10 @@ export default class ResCell extends Component {
     this.setState({ open: false })
   }
 
+  handleRef = reference => {
+    this.setState({ reference })
+  }
+
   componentDidUpdate(prevProps, prevState) {
     const { myUid, plates } = this.context
     if (myUid && !prevState.myUid) {
@@ -78,19 +89,24 @@ export default class ResCell extends Component {
   render() {
     const { uid, index, hasBooked } = this.props
     const { myUid } = this.context
+    const { open, reference } = this.state
 
     if (hasBooked && !uid) return (
       <FreeCell data-index={index} onClick={this.handleClick}>
-        <ForbidModal closeHandler={this.handleClose} open={this.state.open}/>
+        <ForbidModal closeHandler={this.handleClose} open={open} />
       </FreeCell>
     )
     else if (!uid) return (
       <FreeCell data-index={index} onClick={this.handleClick}>
-        <ResModal closeHandler={this.handleClose} {...this.state } />
+        <ResModal closeHandler={this.handleClose} {...this.state} refHandler={this.handleRef} />
       </FreeCell>
     )
     return (uid === myUid ? (
-      <MyCell>
+      <MyCell data-index={index} onClick={this.handleClick}>
+        <DateContextConsumer>{dateContext => (
+          <ResRef closeHandler={this.handleClose} open={open} index={index} date={dateContext} reference={reference} />
+        )}
+        </DateContextConsumer>
         [my booking]
       </MyCell>
     ) : (

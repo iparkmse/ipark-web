@@ -1,24 +1,13 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Modal from '@material-ui/core/Modal'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
-
-const modalStyle = {
-  position: 'fixed',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: '400px',
-  maxWidth: '100%',
-  backgroundColor: 'white',
-  padding: '32px',
-  borderRadius: '10px',
-  boxShadow: '0 3px 7px rgba(0, 0, 0, 0.3)',
-  border: '1px solid rgba(0, 0, 0, 0.3)',
-  textAlign: 'center'
-}
+import { modalStyle } from './ResModal'
+import { stalls, times, timesDB } from './ResTable'
+import firebaseApp from '../../firebase'
 
 const headerStyle = {
   margin: '0px 0px 20px 0px',
@@ -48,37 +37,62 @@ const theme = createMuiTheme({
   }
 })
 
+const db = firebaseApp.database()
+
 class ResRef extends Component {
   state = {
-    open: false
+    open: this.props.open,
+    reference: ''
   }
 
-  handleOpen = () => {
-    this.setState({ open: true })
-  }
   handleClose = () => {
     this.setState({ open: false })
+    this.props.closeHandler()
+  }
+
+  getRef = () => {
+    const { index, date } = this.props
+    const stall = stalls[Math.floor(index / times.length)]
+    const time = timesDB[index % times.length]
+    db.ref(`reservation/${date}/stall${stall}/${time}`).once('value')
+      .then(snapshot => {
+        this.setState({ reference: snapshot.val().bookingRef })
+      })
+  }
+
+  componentDidMount() {
+    const { reference } = this.props
+    if (reference) this.setState({ reference })
+    else this.getRef()
+  }
+
+  componentDidUpdate(oldProps) {
+    const newProps = this.props
+    if (oldProps.open !== newProps.open) {
+      this.setState({ open: newProps.open })
+    }
+    if (newProps.date !== oldProps.date) {
+      this.getRef()
+    }
   }
 
   render(){
-    let RefNum = '0930'
+    const { open, reference } = this.state
     return(
       <MuiThemeProvider theme={theme}>
-        <Typography gutterBottom>Placeholder for reserve button</Typography>
-        <Button onClick={this.handleOpen}>Reserve</Button>
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
-          open={this.state.open}
+          open={open}
           onClose={this.handleClose}
         >
-          <div style={modalStyle}>
+          <div style={{...modalStyle, textAlign: 'center'}}>
             <Typography variant="h6" id="modal-title" style={headerStyle}>
               SUCCESS!
             </Typography>
             <TextField
               label='Booking Reference'
-              defaultValue={RefNum}
+              defaultValue={reference}
               autoFocus
               InputProps={{
                 readOnly: true,
@@ -107,3 +121,11 @@ class ResRef extends Component {
 }
 
 export default ResRef
+
+ResRef.propTypes = {
+  closeHandler: PropTypes.func,
+  open: PropTypes.bool,
+  index: PropTypes.number,
+  date: PropTypes.string,
+  reference: PropTypes.string
+}
