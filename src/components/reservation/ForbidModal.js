@@ -4,7 +4,6 @@ import Button from '@material-ui/core/Button'
 import Modal from '@material-ui/core/Modal'
 import Typography from '@material-ui/core/Typography'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
-import { DateContext } from '../../contexts/DateContext'
 
 
 const modalStyle = {
@@ -32,7 +31,6 @@ const theme = createMuiTheme({
 })
 
 export default class ForbidModal extends Component {
-  static contextType = DateContext
   state = {
     open: this.props.open
   }

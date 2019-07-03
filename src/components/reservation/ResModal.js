@@ -80,7 +80,7 @@ export default class ResModal extends Component {
       const date = this.context
       const index = times.indexOf(this.state.time)
       let i = 0
-      const reference = String(Math.floor(Math.random() * 10000))
+      const reference = (Math.floor(Math.random() * 10000) + 10000).toString().substring(1)
 
       // close the res composer; remain the open props true so ResRef can display
       this.setState({ open: false, error: false })
@@ -90,7 +90,7 @@ export default class ResModal extends Component {
         db.ref(`reservation/${date}/stall${stall}/${time}`).update({
           plates: plates,
           uid: myUid,
-          reference: reference
+          bookingRef: reference
         })
         i++
       }

@@ -6,6 +6,7 @@ import ForbidModal from './ForbidModal'
 import ResRef from './ResRef'
 import { stalls, times } from './ResTable'
 import { CredContext } from '../../contexts/CredContext'
+import { DateContextConsumer } from '../../contexts/DateContext'
 
 const MyCell = styled.div`
   background-color: moccasin;
@@ -97,7 +98,10 @@ export default class ResCell extends Component {
     )
     return (uid === myUid ? (
       <MyCell data-index={index} onClick={this.handleClick}>
-        <ResRef closeHandler={this.handleClose} open={open} />
+        <DateContextConsumer>{dateContext => (
+          <ResRef closeHandler={this.handleClose} open={open} index={index} date={dateContext} />
+        )}
+        </DateContextConsumer>
         [my booking]
       </MyCell>
     ) : (

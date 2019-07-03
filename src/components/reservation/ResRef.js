@@ -6,7 +6,8 @@ import Button from '@material-ui/core/Button'
 import Modal from '@material-ui/core/Modal'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import { modalStyle } from './ResModal'
-
+import { stalls, times, timesDB } from './ResTable'
+import firebaseApp from '../../firebase'
 
 const headerStyle = {
   margin: '0px 0px 20px 0px',
@@ -36,9 +37,12 @@ const theme = createMuiTheme({
   }
 })
 
+const db = firebaseApp.database()
+
 class ResRef extends Component {
   state = {
-    open: this.props.open
+    open: this.props.open,
+    reference: ''
   }
 
   handleClose = () => {
@@ -46,21 +50,39 @@ class ResRef extends Component {
     this.props.closeHandler()
   }
 
+  getRef = () => {
+    const { index, date } = this.props
+    const stall = stalls[Math.floor(index / times.length)]
+    const time = timesDB[index % times.length]
+    db.ref(`reservation/${date}/stall${stall}/${time}`).once('value')
+      .then(snapshot => {
+        console.log(snapshot.val())
+        this.setState({ reference: snapshot.val().bookingRef })
+      })
+  }
+
+  componentDidMount() {
+    this.getRef()
+  }
+
   componentDidUpdate(oldProps) {
     const newProps = this.props
     if (oldProps.open !== newProps.open) {
       this.setState({ open: newProps.open })
     }
+    if (newProps.date !== oldProps.date) {
+      this.getRef()
+    }
   }
 
   render(){
-    const reference = '0930'
+    const { open, reference } = this.state
     return(
       <MuiThemeProvider theme={theme}>
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
-          open={this.state.open}
+          open={open}
           onClose={this.handleClose}
         >
           <div style={{...modalStyle, textAlign: 'center'}}>
