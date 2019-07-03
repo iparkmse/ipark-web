@@ -51,7 +51,8 @@ export default class ResCell extends Component {
     stall: '',
     time: '',
     hours: '1',
-    myUid: ''
+    myUid: '',
+    reference: ''
   }
 
   handleClick = e => {
@@ -71,6 +72,10 @@ export default class ResCell extends Component {
     this.setState({ open: false })
   }
 
+  handleRef = reference => {
+    this.setState({ reference })
+  }
+
   componentDidUpdate(prevProps, prevState) {
     const { myUid, plates } = this.context
     if (myUid && !prevState.myUid) {
@@ -84,7 +89,7 @@ export default class ResCell extends Component {
   render() {
     const { uid, index, hasBooked } = this.props
     const { myUid } = this.context
-    const { open } = this.state
+    const { open, reference } = this.state
 
     if (hasBooked && !uid) return (
       <FreeCell data-index={index} onClick={this.handleClick}>
@@ -93,13 +98,13 @@ export default class ResCell extends Component {
     )
     else if (!uid) return (
       <FreeCell data-index={index} onClick={this.handleClick}>
-        <ResModal closeHandler={this.handleClose} {...this.state} />
+        <ResModal closeHandler={this.handleClose} {...this.state} refHandler={this.handleRef} />
       </FreeCell>
     )
     return (uid === myUid ? (
       <MyCell data-index={index} onClick={this.handleClick}>
         <DateContextConsumer>{dateContext => (
-          <ResRef closeHandler={this.handleClose} open={open} index={index} date={dateContext} />
+          <ResRef closeHandler={this.handleClose} open={open} index={index} date={dateContext} reference={reference} />
         )}
         </DateContextConsumer>
         [my booking]

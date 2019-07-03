@@ -56,13 +56,14 @@ class ResRef extends Component {
     const time = timesDB[index % times.length]
     db.ref(`reservation/${date}/stall${stall}/${time}`).once('value')
       .then(snapshot => {
-        console.log(snapshot.val())
         this.setState({ reference: snapshot.val().bookingRef })
       })
   }
 
   componentDidMount() {
-    this.getRef()
+    const { reference } = this.props
+    if (reference) this.setState({ reference })
+    else this.getRef()
   }
 
   componentDidUpdate(oldProps) {
@@ -123,5 +124,8 @@ export default ResRef
 
 ResRef.propTypes = {
   closeHandler: PropTypes.func,
-  open: PropTypes.bool
+  open: PropTypes.bool,
+  index: PropTypes.number,
+  date: PropTypes.string,
+  reference: PropTypes.string
 }
