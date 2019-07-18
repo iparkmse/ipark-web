@@ -4,21 +4,7 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Modal from '@material-ui/core/Modal'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
-
-const modalStyle = {
-  position: 'fixed',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: '400px',
-  maxWidth: '100%',
-  backgroundColor: 'white',
-  padding: '32px',
-  borderRadius: '10px',
-  boxShadow: '0 3px 7px rgba(0, 0, 0, 0.3)',
-  border: '1px solid rgba(0, 0, 0, 0.3)',
-  textAlign: 'center'
-}
+import { modalStyle } from './ResModal'
 
 const headerStyle = {
   margin: '0px 0px 20px 0px',
@@ -55,7 +41,7 @@ const theme = createMuiTheme({
   }
 })
 
-const BookRef = '0930'
+const BookRef = '0930'  // TODO: get the BookRef from firebase
 
 class ResVal extends Component {
   state = {
@@ -88,8 +74,7 @@ class ResVal extends Component {
     this.setState({ input: e.target.value })
   }
 
-  render(){
-
+  render() {
     const { open, error, input } = this.state
     return(
       <MuiThemeProvider theme={theme}>
@@ -100,7 +85,7 @@ class ResVal extends Component {
           open={open}
           onClose={this.handleClose}
         >
-          <div style={modalStyle}>
+          <div style={{...modalStyle, textAlign: 'center'}}>
             <Typography variant='h6' style={headerStyle}>
               BOOKING VALIDATION
             </Typography>

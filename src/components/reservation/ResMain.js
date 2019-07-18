@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import ResCalendar from './ResCalendar'
 import { reformattedDays } from './ResCalendar'
+import { ResValLink, ResTodayLink } from './ResLink'
 import ResTable from './ResTable'
 import RES_DATA from './res_data'
 import LoginReminder from '../userAuth/LoginReminder'
@@ -14,7 +15,11 @@ const db = firebaseApp.database()
 const dayLength = reformattedDays.length
 
 const Wrapper = styled.div`
-  margin-top: 60px;
+  margin-top: 70px;
+`
+
+const LinkWrapper = styled.div`
+  text-align: right;
 `
 
 export default class ResMain extends Component {
@@ -80,6 +85,10 @@ export default class ResMain extends Component {
     if (login === null) return (<Spinner />)
     return (login ? (
       <Wrapper>
+        <LinkWrapper>
+          <ResValLink />
+          <ResTodayLink />
+        </LinkWrapper>
         <ResCalendar resMainHandler={this.updateRes} />
         <DateContextProvider value={date}>
           <ResTable date={date} resData={resData} />
