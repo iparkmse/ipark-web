@@ -1,6 +1,7 @@
-// all constants (i.e. dates, stall names) for reservation feature
+/* all constants (i.e. dates, stall names) for reservation feature */
 
 import { format, addDays } from 'date-fns'
+import styled from 'styled-components'
 
 const reservabledDays = 3
 let days = new Array(reservabledDays)
@@ -10,7 +11,7 @@ for (let i=0; i<reservabledDays; i++) {
   reformattedDays[i] = (format(addDays(new Date(), i+1), 'MMMD'))  // i.e. Jun11
 }
 
-const today = (format(addDays(new Date()), 'MMMD'))
+const today = (format(addDays(new Date(), 0), 'MMMD'))
 
 const stalls = ['A1', 'A2', 'A3']
 const times = ['7:00', '8:00', '9:00', '10:00', '11:00', '12:00',
@@ -19,3 +20,14 @@ const timesDB = ['a7', 'b8', 'c9', 'd10', 'e11', 'f12',
   'g13', 'h14', 'i15', 'j16', 'k17', 'l18']
 
 export { days, reformattedDays, stalls, times, timesDB, today }
+
+// wrappers used in ResMain and ResToday
+const ResWrapper = styled.div`
+  margin-top: 70px;
+`
+
+const LinkWrapper = styled.div`
+  text-align: right;
+`
+
+export { ResWrapper, LinkWrapper }
