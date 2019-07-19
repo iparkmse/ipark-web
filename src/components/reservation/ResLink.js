@@ -34,6 +34,6 @@ export const ResTodayLink = () => (
   <ResLink to='/today'
     activeStyle={activeStyle}
   >
-    View today's bookings
+    View today&#39;s bookings
   </ResLink>
 )

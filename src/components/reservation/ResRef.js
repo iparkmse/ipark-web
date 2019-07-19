@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button'
 import Modal from '@material-ui/core/Modal'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import { modalStyle } from './ResModal'
-import { stalls, times, timesDB } from './ResTable'
+import { stalls, times, timesDB } from './constants'
 import firebaseApp from '../../firebase'
 
 const headerStyle = {

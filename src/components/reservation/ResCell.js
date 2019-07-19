@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import ResModal from './ResModal'
 import ForbidModal from './ForbidModal'
 import ResRef from './ResRef'
-import { stalls, times } from './ResTable'
+import { stalls, times } from './constants'
 import { CredContext } from '../../contexts/CredContext'
 import { DateContextConsumer } from '../../contexts/DateContext'
 

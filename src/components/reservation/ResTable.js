@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { isEqual } from 'underscore'
+import { times } from './constants'
 import ResCell from './ResCell'
 import Spinner from '../util/Spinner'
 import { CredContext } from '../../contexts/CredContext'
@@ -46,12 +47,6 @@ const Header = ({ date }) => {
     </HeaderGrid>
   )
 }
-
-export const stalls = ['A1', 'A2', 'A3']
-export const times = ['7:00', '8:00', '9:00', '10:00', '11:00', '12:00',
-  '13:00', '14:00', '15:00', '16:00', '17:00', '18:00']
-export const timesDB = ['a7', 'b8', 'c9', 'd10', 'e11', 'f12',
-  'g13', 'h14', 'i15', 'j16', 'k17', 'l18']
 
 const TimeCol = () => times.map(time => {
   return (
