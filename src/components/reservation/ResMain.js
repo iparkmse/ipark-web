@@ -82,7 +82,7 @@ export default class ResMain extends Component {
         </LinkWrapper>
         <ResCalendar resMainHandler={this.updateRes} />
         <DateContextProvider value={date}>
-          <ResTable date={date} resData={resData} />
+          <ResTable date={date} resData={resData} canClick={true} />
         </DateContextProvider>
       </ResWrapper>
     ) : (

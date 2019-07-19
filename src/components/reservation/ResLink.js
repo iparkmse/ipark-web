@@ -17,8 +17,7 @@ const ResLink = styled(NavLink)`
   border-radius: 16px;
 
   &:hover {
-    background-color: #2196f3;
-    color: white;
+    background-color: gainsboro;
   }
 `
 

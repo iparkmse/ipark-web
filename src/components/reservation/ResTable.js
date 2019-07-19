@@ -81,7 +81,7 @@ export default class ResTable extends Component {
   }
 
   render() {
-    const { date, resData } = this.props
+    const { canClick, date, resData } = this.props
     const { hasBooked } = this.state
     if (resData) {
       const resStalls = Object.keys(resData)
@@ -94,7 +94,7 @@ export default class ResTable extends Component {
             {resInfo.map(stalls => stalls.map(stall => {
               return (
                 <Fragment key={stall.index}>
-                  <ResCell uid={stall.uid} index={stall.index} hasBooked={hasBooked} />
+                  <ResCell uid={stall.uid} index={stall.index} hasBooked={hasBooked} canClick={canClick} />
                 </Fragment>
               )
             }))}
@@ -112,5 +112,6 @@ Header.propTypes = {
 
 ResTable.propTypes = {
   date: PropTypes.string,
-  resData: PropTypes.object
+  resData: PropTypes.object,
+  canClick: PropTypes.bool
 }

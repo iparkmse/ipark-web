@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import { LinkWrapper, today, ResWrapper } from './constants'
 import RES_DATA from './res_data'
 import { ResValLink, ResTodayLink } from './ResLink'
@@ -7,6 +8,12 @@ import ResTable from './ResTable'
 import LoginReminder from '../userAuth/LoginReminder'
 import Spinner from '../util/Spinner'
 import firebaseApp from '../../firebase'
+
+const Title = styled.div`
+  text-align: center;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-weight: bold;
+`
 
 const db = firebaseApp.database()
 
@@ -37,7 +44,8 @@ export default class ResToday extends Component {
           <ResValLink />
           <ResTodayLink />
         </LinkWrapper>
-        <ResTable date={today} resData={resData} />
+        <Title>Reservations can&#39;t be made on the current day. View only</Title>
+        <ResTable date={today} resData={resData} canClick={false} />
       </ResWrapper>
     ) : (
       <LoginReminder />

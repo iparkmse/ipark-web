@@ -87,22 +87,22 @@ export default class ResCell extends Component {
   }
 
   render() {
-    const { uid, index, hasBooked } = this.props
+    const { uid, index, hasBooked, canClick } = this.props
     const { myUid } = this.context
     const { open, reference } = this.state
 
     if (hasBooked && !uid) return (
-      <FreeCell data-index={index} onClick={this.handleClick}>
+      <FreeCell data-index={index} onClick={canClick ? this.handleClick : undefined}>
         <ForbidModal closeHandler={this.handleClose} open={open} />
       </FreeCell>
     )
     else if (!uid) return (
-      <FreeCell data-index={index} onClick={this.handleClick}>
+      <FreeCell data-index={index} onClick={canClick ? this.handleClick : undefined}>
         <ResModal closeHandler={this.handleClose} {...this.state} refHandler={this.handleRef} />
       </FreeCell>
     )
     return (uid === myUid ? (
-      <MyCell data-index={index} onClick={this.handleClick}>
+      <MyCell data-index={index} onClick={canClick ? this.handleClick : undefined}>
         <DateContextConsumer>{dateContext => (
           <ResRef closeHandler={this.handleClose} open={open} index={index} date={dateContext} reference={reference} />
         )}
@@ -119,5 +119,7 @@ export default class ResCell extends Component {
 
 ResCell.propTypes = {
   uid: PropTypes.string,
-  index: PropTypes.number
+  index: PropTypes.number,
+  hasBooked: PropTypes.bool,
+  canClick: PropTypes.bool
 }
