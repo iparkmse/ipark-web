@@ -30,8 +30,8 @@ const LinkWrapper = styled.div`
   text-align: right;
 `
 
-const BtnWrapper = styled.div`
+const CentralWrapper = styled.div`
   text-align: center;
 `
 
-export { ResWrapper, LinkWrapper, BtnWrapper }
+export { ResWrapper, LinkWrapper, CentralWrapper }
