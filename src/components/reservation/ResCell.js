@@ -103,9 +103,11 @@ export default class ResCell extends Component {
     )
     return (uid === myUid ? (
       <MyCell data-index={index} onClick={canClick ? this.handleClick : undefined}>
-        <DateContextConsumer>{dateContext => (
+
+        {/* if !canClick, the router is at /today, then dateContext's date is undefined */}
+        <DateContextConsumer>{dateContext => canClick ? (
           <ResRef closeHandler={this.handleClose} open={open} index={index} date={dateContext} reference={reference} />
-        )}
+        ): null}
         </DateContextConsumer>
         [my booking]
       </MyCell>
