@@ -10,7 +10,7 @@ import RadioGroup from '@material-ui/core/RadioGroup'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
-import { stalls, times, timesDB } from './ResTable'
+import { stalls, times, timesDB } from './constants'
 import { DateContext } from '../../contexts/DateContext'
 import firebaseApp from '../../firebase'
 

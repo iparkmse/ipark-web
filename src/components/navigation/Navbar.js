@@ -9,6 +9,8 @@ import LoginForm from '../userAuth/LoginForm'
 import ForgotPass from '../userAuth/ForgotPass'
 import SignupForm from '../userAuth/SignupForm'
 import ResMain from '../reservation/ResMain'
+import ResToday from '../reservation/ResToday'
+import ResVal from '../reservation/ResVal'
 import Spinner from '../util/Spinner'
 import { CredContextProvider } from '../../contexts/CredContext'
 import firebaseApp from '../../firebase'
@@ -73,6 +75,8 @@ export default class Navbar extends Component {
           <Route path='/forgot-password' render={() => <ForgotPass />} />
           <Route path='/signup' render={() => <SignupForm login={login} />} />
           <Route path='/reservation' render={() => <ResMain login={login} />} />
+          <Route path='/validation' render={() => <ResVal login={login} />} />
+          <Route path='/today' render={() => <ResToday login={login} />} />
         </CredContextProvider>
       </BrowserRouter>
     )

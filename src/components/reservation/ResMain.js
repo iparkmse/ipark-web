@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
 import ResCalendar from './ResCalendar'
-import { reformattedDays } from './ResCalendar'
+import { LinkWrapper, reformattedDays, ResWrapper } from './constants'
+import { ResValLink, ResTodayLink } from './ResLink'
 import ResTable from './ResTable'
 import RES_DATA from './res_data'
 import LoginReminder from '../userAuth/LoginReminder'
@@ -12,10 +12,6 @@ import firebaseApp from '../../firebase'
 
 const db = firebaseApp.database()
 const dayLength = reformattedDays.length
-
-const Wrapper = styled.div`
-  margin-top: 60px;
-`
 
 export default class ResMain extends Component {
   updateRes = (ResCalendarData, index) => {
@@ -79,12 +75,16 @@ export default class ResMain extends Component {
 
     if (login === null) return (<Spinner />)
     return (login ? (
-      <Wrapper>
+      <ResWrapper>
+        <LinkWrapper>
+          <ResValLink />
+          <ResTodayLink />
+        </LinkWrapper>
         <ResCalendar resMainHandler={this.updateRes} />
         <DateContextProvider value={date}>
-          <ResTable date={date} resData={resData} />
+          <ResTable date={date} resData={resData} canClick={true} />
         </DateContextProvider>
-      </Wrapper>
+      </ResWrapper>
     ) : (
       <LoginReminder />
     ))
