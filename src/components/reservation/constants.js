@@ -21,7 +21,7 @@ const timesDB = ['a7', 'b8', 'c9', 'd10', 'e11', 'f12',
 
 export { days, reformattedDays, stalls, times, timesDB, today }
 
-// wrappers used in ResMain and ResToday
+// wrappers used in ResMain, ResToday, RefVal
 const ResWrapper = styled.div`
   margin-top: 70px;
 `
@@ -30,4 +30,8 @@ const LinkWrapper = styled.div`
   text-align: right;
 `
 
-export { ResWrapper, LinkWrapper }
+const CentralWrapper = styled.div`
+  text-align: center;
+`
+
+export { ResWrapper, LinkWrapper, CentralWrapper }
