@@ -11,28 +11,49 @@ const Wrapper = styled.div`
   display: inline-block;
   padding: 60px 0;
   width: 100%;
-  height: 80vh;
+  height: 100%;
 `
 
 const GridWrapper = styled.div`
   display: grid;
-  grid-template-columns: 221px 418px;
-  grid-template-rows: 243px 180px;
   justify-content: center;
   margin-top: 20px;
+  grid-template-columns: fit-content(160) fit-content(300);
+  grid-template-rows: fit-content(250) fit-content(414);
 `
 
 const SummaryCell = styled.div`
-  padding: 1px 50px 1px 20px;
+  @media (min-width: 700px) {
+    padding: 1px 30px;
+  }
+
+  @media (max-width: 700px) {
+    padding: 1px 5px;
+  }
 `
 
 const StatusCell = styled.div`
-  grid-column: 2 / 3;
-  grid-row: 1 / 3;
+  @media (min-width: 700px) {
+    grid-column: 2 / 3;
+    grid-row: 1 / 3;
+    padding: 0 30px;
+  }
+
+  @media (max-width: 700px) {
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
+  }
 `
 
 const LegendCell = styled.div`
-  padding: 1px 50px 1px 20px;
+  @media (min-width: 700px) {
+    padding: 1px 30px;
+  }
+
+  @media (max-width: 700px) {
+    margin-top: 30px;
+    padding: 1px 5px;
+  }
 `
 
 const db = firebaseApp.database()
