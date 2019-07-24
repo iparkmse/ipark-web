@@ -22,6 +22,10 @@ const ResGrid = styled.div`
   grid-template-columns: 50px;
   grid-auto-columns: 200px;
   justify-content: center;
+
+  @media (max-width: 700px) {
+    grid-auto-columns: 25%;
+  }
 `
 
 const Label = styled.span`
@@ -35,6 +39,10 @@ const HeaderGrid = styled.div`
   grid-template-rows: 20px;
   justify-content: center;
   text-align: center;
+
+  @media (max-width: 700px) {
+    grid-template-columns: 50px 25% 25% 25%;
+  }
 `
 
 const Header = ({ date }) => {
