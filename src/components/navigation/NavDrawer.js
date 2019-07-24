@@ -1,5 +1,6 @@
 import React,  { Component }  from 'react'
 import PropTypes from 'prop-types'
+import { NavLink } from 'react-router-dom'
 import Drawer from '@material-ui/core/Drawer'
 import Button from '@material-ui/core/Button'
 import List from '@material-ui/core/List'
@@ -12,6 +13,7 @@ import CommuteIcon from '@material-ui/icons/Commute'
 import PersonIcon from '@material-ui/icons/Person'
 import PersonAddIcon from '@material-ui/icons/PersonAdd'
 import NotInterestedIcon from '@material-ui/icons/NotInterested'
+import { logout } from './NavContent'
 
 
 const SideList = ({ toggleDrawer, login }) => (
@@ -22,30 +24,30 @@ const SideList = ({ toggleDrawer, login }) => (
   >
     {login ? (
       <List>
-        <ListItem button>
+        <ListItem button component={NavLink} exact to='/'>
           <ListItemIcon><CommuteIcon /></ListItemIcon>
           <ListItemText>Parking Status</ListItemText>
         </ListItem>
-        <ListItem button>
+        <ListItem button component={NavLink} exact to='/reservation'>
           <ListItemIcon><AlarmIcon /></ListItemIcon>
           <ListItemText>Reservation</ListItemText>
         </ListItem>
-        <ListItem button>
+        <ListItem button onClick={logout}>
           <ListItemIcon><NotInterestedIcon /></ListItemIcon>
           <ListItemText>Log Out</ListItemText>
         </ListItem>
       </List>
     ) : (
       <List>
-        <ListItem button>
+        <ListItem button component={NavLink} exact to='/'>
           <ListItemIcon><CommuteIcon /></ListItemIcon>
           <ListItemText>Parking Status</ListItemText>
         </ListItem>
-        <ListItem button>
+        <ListItem button component={NavLink} exact to='/login'>
           <ListItemIcon><PersonIcon /></ListItemIcon>
           <ListItemText>Login</ListItemText>
         </ListItem>
-        <ListItem button>
+        <ListItem button component={NavLink} exact to='/signup'>
           <ListItemIcon><PersonAddIcon /></ListItemIcon>
           <ListItemText>Sign Up</ListItemText>
         </ListItem>

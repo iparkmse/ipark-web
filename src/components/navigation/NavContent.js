@@ -16,7 +16,7 @@ const peruEffects = { textShadow: '0px 0px 15px peru, 0px 0px 15px peru' }
 
 const auth = firebaseApp.auth()
 
-const logout = () => {
+export const logout = () => {
   auth.signOut().then(() => {
     console.log('user signed out')
   })
