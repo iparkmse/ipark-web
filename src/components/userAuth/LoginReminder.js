@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom'
 const Wrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.6);
   width: 100%;
-  height: 80vh;
+  min-height: 80vh;
+  height: 100%;
   padding-top: 60px;
   margin-top: 40px;
   text-align: center;

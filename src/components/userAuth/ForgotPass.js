@@ -10,20 +10,22 @@ const AlignWrapper = styled.div`
   text-align: left;
 `
 
-const Text = styled.span`
+const Text = styled.p`
   color: white;
-  padding: 25px;
+  padding: 5px 25px;
+  width: 80%;
+`
+
+const InputWrapper = styled.div`
+  display: flex;
+  margin: 10px 20px 40px 20px;
+  width: 80%;
 `
 
 const LinkStyle = {
   fontFamily: 'Gill Sans, sans-serif',
   color: 'lawngreen',
   textDecoration: 'underline'
-}
-
-const InputStyle = {
-  margin: '10px 20px',
-  width: '300px'
 }
 
 const SuccessMsg = styled.div`
@@ -80,12 +82,10 @@ export default class ForgotPass extends Component {
       <Form onSubmit={this.handleSubmit}>
         <AlignWrapper>
           <Title>Forgot Password?</Title>
-          <br />
           <Text>To reset password, type the full email address</Text>
-          <br />
-          <Input value={email} name='email' placeholder='email' onChange={this.handleChange} error={error} style={InputStyle} />
-          <br />
-          <br />
+          <InputWrapper>
+            <Input value={email} name='email' placeholder='email' onChange={this.handleChange} error={error} style={{ flex: '1' }} />
+          </InputWrapper>
           <Button style={{margin: '0 5px 10px 20px'}} type='submit'>submit</Button>
           {error && (
             <Fragment>
