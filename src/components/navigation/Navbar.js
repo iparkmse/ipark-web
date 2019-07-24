@@ -4,6 +4,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import NavContent from './NavContent'
+import NavDrawer from './NavDrawer'
 import NavHome from './NavHome'
 import LoginForm from '../userAuth/LoginForm'
 import ForgotPass from '../userAuth/ForgotPass'
@@ -31,7 +32,8 @@ export default class Navbar extends Component {
   state = {
     login: null,
     myUid: null,
-    plates: null
+    plates: null,
+    isLargeScreen: null,
   }
 
   componentDidMount() {
@@ -49,15 +51,23 @@ export default class Navbar extends Component {
           })
       }
     })
+    window.addEventListener('resize', this.handleResize)
+    this.handleResize()
   }
 
   componentWillUnmount() {
     unsubscribeAuth()
+    window.removeEventListener('resize', this.handleResize)
     console.log('Navbar unmounted')
   }
 
+  handleResize = () => {
+    const mediaQuery = window.matchMedia('(min-width: 705px)')
+    this.setState({ isLargeScreen: mediaQuery.matches })
+  }
+
   render() {
-    const { login } = this.state
+    const { login, isLargeScreen } = this.state
     if (login === null) return (<Spinner />)
     return (
       <BrowserRouter>
@@ -67,7 +77,7 @@ export default class Navbar extends Component {
               <ImgWrapper>
                 <img src={require('../../img/ipark_logo.png')} alt='ipark' />
               </ImgWrapper>
-              <NavContent login={login} />
+              {isLargeScreen ? <NavContent login={login} /> : <NavDrawer login={login} />}
             </Toolbar>
           </AppBar>
           <Route exact path='/' render={() => <NavHome login={login} />} />

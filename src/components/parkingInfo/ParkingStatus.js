@@ -11,6 +11,7 @@ const Wrapper = styled.div`
   display: inline-block;
   padding: 60px 0;
   width: 100%;
+  min-height: 80vh;
   height: 100%;
 `
 
