@@ -7,8 +7,6 @@ const Table = styled.table`
   border-collapse: collapse;
   text-align: center;
   font-family: 'Gill Sans', sans-serif;
-  /* margin-left: auto;
-  margin-right: auto; */
 `
 
 const LeftColumn = styled.td`
@@ -34,7 +32,7 @@ const LabelTitle = styled.label`
 const LabelStallID = styled.label`
   color: NavajoWhite;
   font-size: 28px;
-  padding: 10px 20px 10px 20px;
+  padding: 5px;
   vertical-align: middle;
   letter-spacing: 1px;
 `
