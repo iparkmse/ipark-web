@@ -20,10 +20,10 @@ export const modalStyle = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '400px',
+  width: '275px',
   maxWidth: '100%',
   backgroundColor: 'white',
-  padding: '32px',
+  padding: '25px',
   borderRadius: '10px',
   boxShadow: '0 3px 7px rgba(0, 0, 0, 0.3)',
   border: '1px solid rgba(0, 0, 0, 0.3)'
@@ -135,6 +135,7 @@ export default class ResModal extends Component {
             </Typography>
             <TextField
               id='outlined-input-plates'
+              style={{width: 150}}
               label='Car Plates'
               type='text'
               name='plates'
@@ -186,7 +187,7 @@ export default class ResModal extends Component {
                 </option>
               ))}
             </TextField>
-            <FormControl component="fieldset" style={{margin: '10px 0 0 20px'}}>
+            <FormControl component="fieldset" style={{margin: '10px 0 0 10px'}}>
               <FormLabel component="legend" style={{fontSize: 12}}>Hours</FormLabel>
               <RadioGroup
                 aria-label="Hours"
@@ -195,9 +196,9 @@ export default class ResModal extends Component {
                 onChange={this.handleChange}
                 row
               >
-                <FormControlLabel value='1' control={<Radio color='primary' />} label="1" />
-                <FormControlLabel value='2' control={<Radio color='primary' />} label="2" />
-                <FormControlLabel value='3' control={<Radio color='primary' />} label="3" />
+                <FormControlLabel value='1' control={<Radio color='primary' />} label="1" style={{margin: '0 8px 0 -7px'}} />
+                <FormControlLabel value='2' control={<Radio color='primary' />} label="2" style={{margin: '0 8px 0 -7px'}} />
+                <FormControlLabel value='3' control={<Radio color='primary' />} label="3" style={{margin: '0 8px 0 -7px'}} />
               </RadioGroup>
             </FormControl>
             <br />
