@@ -1,0 +1,7 @@
+# react-router paths
+/reservation    /index.html   200
+/signup    /index.html   200
+/login    /index.html   200
+/forgot-password    /index.html   200
+/today    /index.html   200
+/validation    /index.html   200
