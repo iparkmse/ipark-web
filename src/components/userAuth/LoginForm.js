@@ -10,7 +10,7 @@ import firebaseApp from '../../firebase'
 export const Form = styled.form`
   background-color: rgba(0, 0, 0, 0.6);  /* Black with Transparency of 40% */
   width: 100%;
-  height: 80vh;
+  height: 100%;
   padding: 60px 10px;
   text-align: center;
   vertical-align: center;
