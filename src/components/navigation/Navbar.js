@@ -77,8 +77,7 @@ export default class Navbar extends Component {
               <ImgWrapper>
                 <img src={require('../../img/ipark_logo.png')} alt='ipark' />
               </ImgWrapper>
-              {isLargeScreen && <NavContent login={login} />}
-              {!isLargeScreen && <NavDrawer login={login} />}
+              {isLargeScreen ? <NavContent login={login} /> : <NavDrawer login={login} />}
             </Toolbar>
           </AppBar>
           <Route exact path='/' render={() => <NavHome login={login} />} />
