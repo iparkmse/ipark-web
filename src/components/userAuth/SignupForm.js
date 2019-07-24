@@ -8,28 +8,41 @@ import firebaseApp from '../../firebase'
 
 const InputGrid = styled.div`
   display: grid;
-  grid-template-columns: 400px;
+  grid-template-columns: 560px;
   grid-template-rows: 40px 40px 40px 40px 40px;
   row-gap: 10px;
   justify-content: center;
   margin-bottom: 20px;
+
+  @media (max-width: 700px) {
+    grid-template-columns: 80%;
+  }
 `
 
 const NameGrid = styled.div`
   display: grid;
-  grid-template-columns: 195px 195px;
+  grid-template-columns: 260px 260px;
   grid-template-rows: 40px;
-  column-gap: 10px;
+  column-gap: 40px;
+
+  @media (max-width: 700px) {
+    grid-template-columns: 47% 47%;
+    column-gap: 6%;
+  }
 `
 
 const ErrorGrid = styled.div`
   display: grid;
-  grid-template-columns: 430px;
+  grid-template-columns: 560px;
   line-height: 20px;
   justify-content: center;
   text-align: left;
   color: orangered;
   font-weight: 700;
+
+  @media (max-width: 700px) {
+    grid-template-columns: 80%;
+  }
 `
 
 const validate = (email, pass, confirmPass, fName, lName, licensePlate) => {
